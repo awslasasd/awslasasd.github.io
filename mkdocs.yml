@@ -1,0 +1,9 @@
+site_name: My new world
+theme: 
+ name: material
+nav:
+  - Home : index.md
+  - Class: 
+    - 机器人学: Class/机器人学.md 
+    - 运筹学: Class/OR.md
+  - 关于 : about.md
