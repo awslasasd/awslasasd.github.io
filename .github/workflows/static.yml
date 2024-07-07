@@ -20,5 +20,5 @@ jobs:
           python-version: 3.x
       - run: pip install -r requirements.txt
       - name: Create CNAME file
-        run: echo "https://awslasasd.github.io/" > docs/CNAME   # Adjust the path if your configuration is different
+        run: echo "https://awslasasd.github.io" > docs/CNAME   # Adjust the path if your configuration is different
       - run: mkdocs gh-deploy --force
