@@ -14,8 +14,6 @@ copyright: Copyright <span style="font-family:Arial;">&copy;</span> 2023-2024 <a
 # configuration
 theme:
   name: material
-  logo: logo.ico
-  favicon: logo.ico
   icon:
     admonition:
       note: octicons/tag-16
@@ -186,6 +184,9 @@ nav:
   - Class: 
     - 机器人学: Class/机器人学.md 
     - 运筹学: Class/OR.md
+  - Tools: 
+    - Git: Tools/Git.md
+    - Createsite : Tools/Createsite.md 
   - 关于 : about.md
 
 
