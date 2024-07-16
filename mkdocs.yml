@@ -177,17 +177,7 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 
-# navigation
-# 注意左右下划线的写法
-nav:
-  - Home : index.md
-  - Class: 
-    - 机器人学: Class/机器人学.md 
-    - 运筹学: Class/OR.md
-  - Tools: 
-    - Git: Tools/Git.md
-    - Createsite : Tools/Createsite.md 
-  - 关于 : about.md
+
 
 
 
@@ -222,3 +212,15 @@ plugins:
         - index.md
         - link.md
       strict: false
+
+
+# navigation
+# 注意左右下划线的写法
+nav:
+  - Home : index.md
+  - Class: 
+    - 机器人学: Class/机器人学.md 
+    - 运筹学: Class/OR.md
+  - Tools: 
+    - Git: Tools/Git.md
+    - Createsite : Tools/Createsite.md 
