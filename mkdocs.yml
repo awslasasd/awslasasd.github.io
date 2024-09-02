@@ -221,6 +221,7 @@ nav:
   - Class: 
     - 机器人学: Class/机器人学.md 
     - 运筹学: Class/OR.md
+    - 自动控制原理 : Class/自动控制原理.md
   - Tools: 
     - Git: Tools/Git.md
     - Createsite : Tools/Createsite.md 
