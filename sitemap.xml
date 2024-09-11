@@ -2,52 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://awslasasd.github.io/</loc>
-         <lastmod>2024-09-09</lastmod>
+         <lastmod>2024-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://awslasasd.github.io/Class/OR/</loc>
-         <lastmod>2024-09-09</lastmod>
+         <lastmod>2024-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://awslasasd.github.io/Class/%E5%B5%8C%E5%85%A5%E5%BC%8F/</loc>
-         <lastmod>2024-09-09</lastmod>
+         <lastmod>2024-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://awslasasd.github.io/Class/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6/</loc>
-         <lastmod>2024-09-09</lastmod>
+         <lastmod>2024-09-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://awslasasd.github.io/Class/%E7%A9%BA%E4%B8%AD%E6%9C%BA%E5%99%A8%E4%BA%BA/</loc>
+         <lastmod>2024-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://awslasasd.github.io/Class/%E8%87%AA%E5%8A%A8%E5%8C%96%E7%AB%9E%E8%B5%9B%E5%AE%9E%E8%AE%AD/</loc>
-         <lastmod>2024-09-09</lastmod>
+         <lastmod>2024-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://awslasasd.github.io/Class/%E8%87%AA%E5%8A%A8%E6%8E%A7%E5%88%B6%E5%8E%9F%E7%90%86/</loc>
-         <lastmod>2024-09-09</lastmod>
+         <lastmod>2024-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://awslasasd.github.io/Tools/Createsite/</loc>
-         <lastmod>2024-09-09</lastmod>
+         <lastmod>2024-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://awslasasd.github.io/Tools/Git/</loc>
-         <lastmod>2024-09-09</lastmod>
+         <lastmod>2024-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://awslasasd.github.io/Tools/latex/</loc>
-         <lastmod>2024-09-09</lastmod>
+         <lastmod>2024-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://awslasasd.github.io/Tools/python/</loc>
-         <lastmod>2024-09-09</lastmod>
+         <lastmod>2024-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
