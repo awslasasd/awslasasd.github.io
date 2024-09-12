@@ -219,8 +219,6 @@ plugins:
 nav:
   - Home : index.md
   - Class: 
-    - 机器人学: Class/机器人学.md 
-    - 运筹学: Class/OR.md
     - 自动控制原理 : Class/自动控制原理.md
     - 空中机器人 : Class/空中机器人.md
     - 自动化竞赛实训 : Class/自动化竞赛实训.md
