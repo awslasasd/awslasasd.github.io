@@ -14,7 +14,6 @@ copyright: Copyright <span style="font-family:Arial;">&copy;</span> 2023-2024 <a
 # configuration
 theme:
   name: material
-  custom_dir: overrides
   icon:
     admonition:
       note: octicons/tag-16
