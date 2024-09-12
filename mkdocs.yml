@@ -14,6 +14,7 @@ copyright: Copyright <span style="font-family:Arial;">&copy;</span> 2023-2024 <a
 # configuration
 theme:
   name: material
+  custom_dir: overrides
   icon:
     admonition:
       note: octicons/tag-16
@@ -222,6 +223,7 @@ nav:
     - 自动控制原理 : Class/自动控制原理.md
     - 空中机器人 : Class/空中机器人.md
     - 自动化竞赛实训 : Class/自动化竞赛实训.md
+    - 智能电子设备开发 : Class/智能电子设备开发.md
   - Tools: 
     - Git: Tools/Git.md
     - Createsite : Tools/Createsite.md 
