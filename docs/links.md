@@ -24,10 +24,10 @@ nostatistics: True
 <div class="flink-list-item">
     <a href="https://www.metriver.top/" title="曲奇" target="_blank">
         <div class="flink-item-icon">
-            <img src="https://github.com/awslasasd/awslasasd.github.io/blob/master/docs/friends/donotknow.png" alt="曲奇">
+            <img src="../friends/avatar.png" alt="曲奇">
         </div>
         <div class="flink-item-name heti-skip">曲奇's blog</div>
-        <div class="flink-item-desc"></div>
+        <div class="flink-item-desc">metriver</div>
     </a>
 </div>
 
