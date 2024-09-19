@@ -25,7 +25,7 @@ statistics: true
 function updateTime() {
     var date = new Date();
     var now = date.getTime();
-    var startDate = new Date("2022/01/03 09:10:00");
+    var startDate = new Date("2024/06/03 09:10:00");
     var start = startDate.getTime();
     var diff = now - start;
     var y, d, h, m;
