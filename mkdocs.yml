@@ -150,7 +150,7 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/Phil-Fan
+      link: https://github.com/awslasasd
       name: PhilFan's Profile
 
 extra_css:
