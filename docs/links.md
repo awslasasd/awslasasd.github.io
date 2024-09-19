@@ -31,4 +31,14 @@ nostatistics: True
     </a>
 </div>
 
+<div class="flink-list-item">
+    <a href="https://www.philfan.cn/" title="fhw" target="_blank">
+        <div class="flink-item-icon">
+            <img src="../friends/Philfan.png" alt="fhw">
+        </div>
+        <div class="flink-item-name heti-skip">Philfan</div>
+        <div class="flink-item-desc">无敌了孩子</div>
+    </a>
+</div>
+
 </div>
