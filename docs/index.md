@@ -7,9 +7,15 @@ statistics: true
 
 # o(〃'▽'〃)o Hi!
 
-这里是Twinkle的个人笔记本哦！  
+# 这里是Twinkle的个人笔记本哦！  
 
-[:octicons-link-16: 朋友们!](links/) / 
+如果你喜欢，不妨点个star吧！
+
+!!!note 正在学的课
+    空中机器人<br>
+    机器学习<br>
+
+[:octicons-link-16: 朋友们!](links.md) / 
 [:material-chart-line: 站点统计](javascript:toggle_statistics();)
 
 <div id="statistics" markdown="1" class="card" style="width: 27em; border-color: transparent; opacity: 0; font-size: 75%">
