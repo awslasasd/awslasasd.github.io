@@ -57,18 +57,33 @@ theme:
 
   language: 'zh'
   palette:
+    # - media: "(prefers-color-scheme: light)"
+    #   scheme: default
+    #   toggle:
+    #     icon: material/weather-sunny
+    #     name: Switch to dark mode
+
+    # # Palette toggle for dark mode
+    # - media: "(prefers-color-scheme: dark)"
+    #   scheme: slate
+    #   toggle:
+    #     icon: material/weather-night
+    #     name: Switch to light mode
+
+    # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
       toggle:
-        icon: material/weather-sunny
+        icon: material/brightness-7
         name: Switch to dark mode
 
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       toggle:
-        icon: material/weather-night
+        icon: material/brightness-4
         name: Switch to light mode
+
 
   font:
     text: Noto Serif SC # Roboto
@@ -229,3 +244,5 @@ nav:
     - Git: Tools/Git.md
     - Createsite : Tools/Createsite.md 
     - Latex: Tools/latex.md
+    - Linux :
+      - 双系统更改开机顺序 : Tools/Linux/linux.md
