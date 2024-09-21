@@ -4,6 +4,8 @@ typora-copy-images-to: ..\..\picture
 
 # Windows和Ubuntu双系统更改开机默认启动顺序
 
+!!!bug Attention 
+    如果是联想拯救者，请不要插着PD快充开机，否则会导致cfg文件重置<br>
 
 ## 1.打开终端进入/boot/grub/目录
 
@@ -17,7 +19,7 @@ typora-copy-images-to: ..\..\picture
 
 ![image-20240922012347032](../../picture/image-20240922012347032.png)
 
-!!!note "备份文件" 
+!!!note 备份文件
     如果担心编辑出错，可以先保存文件再编辑<br>
     `mv grub.cfg grub.cfg.back` <br>
 
