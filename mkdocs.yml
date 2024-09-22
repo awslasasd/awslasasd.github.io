@@ -235,7 +235,7 @@ plugins:
 nav:
   - Home : index.md
   - Class: 
-    - 自动控制原理 : Class/自动控制原理.md
+    - 电气控制技术 : Class/电气控制技术.md
     - 空中机器人 : Class/空中机器人.md
     - 自动化竞赛实训 : Class/自动化竞赛实训.md
     - 智能电子设备开发 : Class/智能电子设备开发.md
