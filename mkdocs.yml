@@ -245,5 +245,6 @@ nav:
     - Git: Tools/Git.md
     - Createsite : Tools/Createsite.md 
     - Latex: Tools/latex.md
+    - Juypter: Tools/Juypter.md
     - Linux :
       - 双系统更改开机顺序 : Tools/Linux/linux.md
