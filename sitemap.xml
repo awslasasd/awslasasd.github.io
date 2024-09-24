@@ -61,6 +61,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://awslasasd.github.io/Tools/Juypter/</loc>
+         <lastmod>2024-09-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://awslasasd.github.io/Tools/latex/</loc>
          <lastmod>2024-09-24</lastmod>
          <changefreq>daily</changefreq>
