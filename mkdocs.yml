@@ -236,11 +236,12 @@ nav:
   - Home : index.md
   - Class: 
     - 电气控制技术 : Class/电气控制技术.md
-    - 空中机器人 : Class/空中机器人.md
-    - 自动化竞赛实训 : Class/自动化竞赛实训.md
     - 智能电子设备开发 : Class/智能电子设备开发.md
-    - 机器学习 : Class/机器学习.md
     - 现代控制原理 : Class/现代控制原理.md
+  - Robotics : 
+    - 空中机器人 : Robotics/空中机器人.md
+    - 自动化竞赛实训 : Robotics/自动化竞赛实训.md
+    - 机器学习 : Robotics/机器学习.md
   - Tools: 
     - Git: Tools/Git.md
     - Createsite : Tools/Createsite.md 
@@ -248,3 +249,4 @@ nav:
     - Juypter: Tools/Juypter.md
     - Linux :
       - 双系统更改开机顺序 : Tools/Linux/linux.md
+      - SSH : Tools/linux/ssh.md
