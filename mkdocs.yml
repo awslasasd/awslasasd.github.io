@@ -250,4 +250,4 @@ nav:
     - Juypter: Tools/Juypter.md
     - Linux :
       - 双系统更改开机顺序 : Tools/Linux/linux.md
-      - SSH : Tools/linux/ssh.md
+      - SSH : Tools/Linux/ssh.md
