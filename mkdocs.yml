@@ -250,6 +250,7 @@ nav:
     - Createsite : Tools/Createsite.md 
     - Latex: Tools/latex.md
     - Juypter: Tools/Juypter.md
+    - AI: Tools/AI.md
     - Linux :
       - 双系统更改开机顺序 : Tools/Linux/linux.md
       - SSH : Tools/Linux/ssh.md
