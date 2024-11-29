@@ -251,6 +251,7 @@ nav:
     - Latex: Tools/latex.md
     - Juypter: Tools/Juypter.md
     - AI: Tools/AI.md
+    - 发展对象: Tools/发展对象考试.md
     - Linux :
       - 双系统更改开机顺序 : Tools/Linux/linux.md
       - SSH : Tools/Linux/ssh.md
