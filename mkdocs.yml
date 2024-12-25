@@ -244,6 +244,7 @@ nav:
     - 人工智能与机器学习 : Class/人工智能与机器学习.md
     - 智能控制技术 : Class/智能控制技术.md
     - 传感与检测 : Class/传感与检测.md
+    - 毛概 : Class/毛概.md
   - Robotics : 
     - 空中机器人 : Robotics/空中机器人.md
     - 自动化竞赛实训 : Robotics/自动化竞赛实训.md
@@ -255,6 +256,7 @@ nav:
     - Juypter: Tools/Juypter.md
     - AI: Tools/AI.md
     - 发展对象: Tools/发展对象考试.md
+    - OneDrive: Tools/OneDrive.md
     - Linux :
       - 双系统更改开机顺序 : Tools/Linux/linux.md
       - SSH : Tools/Linux/ssh.md
