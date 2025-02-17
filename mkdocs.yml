@@ -250,6 +250,7 @@ nav:
   - Robotics : 
     - 空中机器人 : Robotics/空中机器人.md
     - 自动化竞赛实训 : Robotics/自动化竞赛实训.md
+    - 机器人建模与控制 : Robotics/机器人建模与控制.md
     - 机器学习 : Robotics/机器学习.md
   - Tools: 
     - Git: Tools/Git.md
