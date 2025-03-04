@@ -252,6 +252,8 @@ nav:
     - 自动化竞赛实训 : Robotics/自动化竞赛实训.md
     - 机器人建模与控制 : Robotics/机器人建模与控制.md
     - 机器学习 : Robotics/机器学习.md
+  - Reproduction :
+    - UAV自主探索 : Reproduction/P_01.md
   - Tools: 
     - Git: Tools/Git.md
     - Createsite : Tools/Createsite.md 
