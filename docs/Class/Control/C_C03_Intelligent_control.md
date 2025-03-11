@@ -285,9 +285,9 @@
 **第一次作业**
 
 [第一次作业——递阶控制](../class_source/C_C03/LAB1.pdf) <br>
-<iframe src="https://krasjet.github.io/quaternion/quaternion.pdf" width="100%" height="600px" style="border: none;">
+<!-- <iframe src="https://krasjet.github.io/quaternion/quaternion.pdf" width="100%" height="600px" style="border: none;">
 This browser does not support PDFs
-</iframe>
+</iframe> -->
 
 **第二次作业**
 

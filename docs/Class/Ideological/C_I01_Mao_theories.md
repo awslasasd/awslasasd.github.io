@@ -14,3 +14,6 @@
     	[98毛概复习资料5](https://www.cc98.org/topic/5800263)<br>
     	[98毛概复习资料6](https://www.cc98.org/topic/5794535)<br>
     	
+<iframe src="https://file.cc98.org/v2-upload/2024-09-08/beqprgsz.pdf" width="100%" height="600px" style="border: none;">
+This browser does not support PDFs
+</iframe>

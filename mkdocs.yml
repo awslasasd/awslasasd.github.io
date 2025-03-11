@@ -238,24 +238,28 @@ plugins:
 nav:
   - Home : index.md
   - Class: 
-    - "控制":
+    - 控制 :
       - 电气控制技术 : Class/Control/C_C01_Electrical_control.md
       - 现代控制原理 : Class/Control/C_C02_Modern_control.md
       - 智能控制技术 : Class/Control/C_C03_Intelligent_control.md
       - 运动控制 : Class/Control/C_C04_Motion_contorl.md
-    - "传感检测": 
+    - 传感检测 : 
       - 传感与检测 : Class/Sensor/C_S01_Sensing_detection.md
-    - 智能电子设备开发 : Class/智能电子设备开发.md
-    - 人工智能与机器学习 : Class/人工智能与机器学习.md
-    - 毛概 : Class/毛概.md
-    - 信息安全导论 : Class/信息安全导论.md
+    - 机器学习 :
+      - 人工智能与机器学习 : Class/MachineLearning/C_M01_AI_ML.md
+    - 思政 :
+      - 毛概 : Class/Ideological/C_I01_Mao_theories.md
+    - 大数据 :
+      - 信息安全导论 : Class/Bigdata/C_B01_Information_safety.md
   - Robotics : 
     - 空中机器人 : Robotics/空中机器人.md
     - 自动化竞赛实训 : Robotics/自动化竞赛实训.md
     - 机器人建模与控制 : Robotics/机器人建模与控制.md
+    - 智能电子设备开发 : Robotics/智能电子设备开发.md
     - 机器学习 : Robotics/机器学习.md
   - Reproduction :
     - UAV自主探索 : Reproduction/P_01.md
+    - FALCON : Reproduction/P_02.md
   - Tools: 
     - Git: Tools/Git.md
     - Createsite : Tools/Createsite.md 
