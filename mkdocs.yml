@@ -238,14 +238,15 @@ plugins:
 nav:
   - Home : index.md
   - Class: 
-    - 电气控制技术 : Class/电气控制技术.md
+    - "控制":
+      - 电气控制技术 : Class/Control/C_C01_Electrical_control.md
+      - 现代控制原理 : Class/Control/C_C02_Modern_control.md
+      - 智能控制技术 : Class/Control/C_C03_Intelligent_control.md
+      - 运动控制 : Class/Control/C_C04_Motion_contorl.md
     - 智能电子设备开发 : Class/智能电子设备开发.md
-    - 现代控制原理 : Class/现代控制原理.md
     - 人工智能与机器学习 : Class/人工智能与机器学习.md
-    - 智能控制技术 : Class/智能控制技术.md
     - 传感与检测 : Class/传感与检测.md
     - 毛概 : Class/毛概.md
-    - 运动控制 : Class/运动控制.md
     - 信息安全导论 : Class/信息安全导论.md
   - Robotics : 
     - 空中机器人 : Robotics/空中机器人.md

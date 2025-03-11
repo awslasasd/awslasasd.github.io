@@ -1,5 +1,5 @@
 ---
-typora-copy-images-to: ..\picture
+typora-copy-images-to: ..\..\picture
 ---
 
 # 现代控制原理
@@ -21,4 +21,4 @@ typora-copy-images-to: ..\picture
 
 #### 采样
 
-![46jegjqb](../picture/46jegjqb.png)
+![46jegjqb](../../picture/46jegjqb.png)

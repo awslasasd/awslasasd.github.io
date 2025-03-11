@@ -284,21 +284,22 @@
 
 **第一次作业**
 
-[第一次作业——递阶控制](./class_source/智能控制技术/LAB1.pdf) <br>
-
-
+[第一次作业——递阶控制](../class_source/C_C03/LAB1.pdf) <br>
+<iframe src="https://krasjet.github.io/quaternion/quaternion.pdf" width="100%" height="600px" style="border: none;">
+This browser does not support PDFs
+</iframe>
 
 **第二次作业**
 
-[第二次作业——专家控制](./class_source/智能控制技术/LAB2.pdf) <br>
+[第二次作业——专家控制](../class_source/C_C03/LAB2.pdf) <br>
 [第二次作业参考资料](https://www.doc88.com/p-018651765242.html) <br>
 
 **第三次作业**
 
-[第三次作业——模糊控制](./class_source/智能控制技术/LAB3.pdf) <br>
+[第三次作业——模糊控制](../class_source/C_C03/LAB3.pdf) <br>
 [第三次作业参考资料](https://www.doc88.com/p-047673747915.html) <br>
 
 **第四次作业**
 
-[第四次作业——神经网络辨识](./class_source/智能控制技术/LAB4.pdf) <br>
+[第四次作业——神经网络辨识](../class_source/C_C03/LAB4.pdf) <br>
 [第四次参考资料](https://ww2.mathworks.cn/help/deeplearning/ug/fit-data-using-neural-net-fitting-app.html?searchHighlight=nftool&s_tid=srchtitle_support_results_6_nftool)<br>
