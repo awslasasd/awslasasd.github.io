@@ -11,8 +11,8 @@ statistics: true
 
 如果你喜欢，不妨点个star吧！
 
-!!!note 正在学的课
-    空中机器人<br>
+!!!note "正在学的课"
+    机器人建模<br>
     机器学习<br>
 
 [:octicons-link-16: 朋友们!](links.md) / 

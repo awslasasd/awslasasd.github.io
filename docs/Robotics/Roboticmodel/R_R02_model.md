@@ -182,6 +182,192 @@ $$
 \end{pmatrix}
 $$
 
+## 微分运动学与静力学
+
+### 定义
+
+#### 符号表示
+
+|       符号       |            含义             |              注意               |
+| :--------------: | :-------------------------: | :-----------------------------: |
+|     $^AV_Q$      |      A坐标系下Q的速度       |                                 |
+|   $^B(^AV_Q)$    |   在$B'$坐标系下的Q的速度   |      $^B(^AV_Q) \ne ^BV_Q$      |
+|  $\upsilon _c$   | 世界坐标系下C坐标原点的速度 |   $\upsilon _c = ^UV_{CORG}$    |
+|   $^A\Omega_Q$   |      A坐标系下Q的速度       |                                 |
+| $^B(^A\Omega_Q)$ |   在$B'$坐标系下的Q的速度   | $^B(^A\Omega_Q) \ne ^B\Omega_Q$ |
+|   $\omega _c$    | 世界坐标系下C坐标原点的速度 |  $\omega _c = ^U\Omega_{CORG}$  |
+
+!!! attention 注意符号
+    $^A\upsilon _c = {}^A_U\mathbf{R} \upsilon _c = {}^A_U\mathbf{R} ^UV_{CORG} \ne ^AV_{CORG}$<br>
+    $^A\omega _c = {}^A_U\mathbf{R} \omega _c = {}^A_U\mathbf{R} ^U\Omega _{CORG} \ne ^A \Omega _{CORG}$<br>
+    $B'$坐标系其实是与A坐标系原点相同，姿态与B坐标系相同的一个新的坐标系<br>
+
+#### 矩阵定义
+
+$$
+S = \dot{R}R^\top = \dot{R}R^{-1}
+$$
+
+其中S为反对称矩阵，具有以下性质：
+
+$$
+S + S^\top = 0_n
+$$
+
+**三维向量与三维反对称矩阵的关系**
+
+针对三维向量 $P = \begin{pmatrix} p_x \\ p_y \\ p_z \end{pmatrix}$，记由 $P$ 生成的三维反对称矩阵为 $P^\wedge$，则有：
+
+$$
+P^\wedge = \begin{pmatrix} p_x \\ p_y \\ p_z \end{pmatrix}^\wedge = \begin{pmatrix} 0 & -p_z & p_y \\ p_z & 0 & -p_x \\ -p_y & p_x & 0 \end{pmatrix}
+$$
+
+三维反对称矩阵与三维向量是一一对应的，记 $P^\wedge$ 对应的三维向量为 $\left( P^\wedge \right)^\vee = P$，则有：
+
+$$
+P = \begin{pmatrix} 0 & -p_z & p_y \\ p_z & 0 & -p_x \\ -p_y & p_x & 0 \end{pmatrix}^\vee = \begin{pmatrix} p_x \\ p_y \\ p_z \end{pmatrix}
+$$
+
+
+
+#### 线速度向量
+
+若 \( {}^B\mathbf{Q} \) 是描述某个点的位置矢量，该点关于{B}的速度是 \( {}^B\mathbf{V}_Q \)。
+
+$$
+{}^B\mathbf{V}_Q = \frac{d}{dt} {}^B\mathbf{Q} = \lim_{\Delta t \to 0} \frac{{}^B\mathbf{Q}(t + \Delta t) - {}^B\mathbf{Q}(t)}{\Delta t}
+$$
+
+速度矢量 \( ^A({}^B\mathbf{V}_Q ) \) 
+
+$$
+{}^A({}^B\mathbf{V}_Q) = {}^A_B\mathbf{R} {}^B\mathbf{V}_Q = \frac{d}{dt} {}^A_B\mathbf{Q} = \lim_{\Delta t \to 0} {}^A_B\mathbf{R}(t) \left( \frac{{}^B\mathbf{Q}(t + \Delta t) - {}^B\mathbf{Q}(t)}{\Delta t} \right)
+$$
+
+当两个上标相同时，无需给出外层上标，即：
+
+$$
+^B(^BV_Q) = ^BV_Q
+$$
+
+!!! note 需要注意，\( {}^A({}^B\mathbf{V}_Q) \) 不同于 \( {}^A\mathbf{V}_Q \)
+
+    $$
+    \begin{align*}
+    {}^A\mathbf{V}_Q &= \lim_{\Delta t \to 0} \frac{{}^A\mathbf{Q}(t + \Delta t) - {}^A\mathbf{Q}(t)}{\Delta t}\\
+    &= \lim_{\Delta t \to 0} \frac{{}^A\mathbf{P}_{BORG}(t + \Delta t) + {}^A_B\mathbf{R}(t + \Delta t) {}^B\mathbf{Q}(t + \Delta t) - {}^A\mathbf{P}_{BORG}(t) - {}^A_B\mathbf{R}(t) {}^B\mathbf{Q}(t)}{\Delta t}\\
+    &= ^AV_{BORG} + {}^A_B\mathbf{\dot{R}}{}^B\mathbf{Q}+^A_B\mathbf{R}  {}^B\mathbf{V}_Q
+    \end{align*}
+    $$
+
+### 角速度向量
+
+刚体的定点转动：刚体绕体内或其外延部分的一固定点旋转
+
+!!! note "定点转动不同于定轴转动"
+    | 区别点 | 定点转动 | 定轴转动 |
+    | --- | --- | --- |
+    | **转轴性质** | 转轴通过一个固定点，但转轴的方向在空间中会随时间改变 | 转轴在空间中的位置和方向始终保持不变 |
+    | **角速度特性** | 角速度的大小和方向都是时间的函数，角速度矢量在空间中不断变化 | 角速度的方向始终沿着固定轴，只有大小可以随时间变化 |
+    | **运动复杂程度** | 运动复杂，需要考虑多个方向的转动，通常用欧拉角描述 | 运动简单，仅在一个固定平面内进行 |
+    | **自由度** | 3个自由度 | 1个自由度 |
+    | **运动描述** | 可以看作绕瞬时轴的定轴转动，但瞬时轴会不断变化 | 始终绕一个固定的轴转动 |
+    | **典型实例** | 陀螺、回转罗盘 | 门的转动、风车的旋转 |
+
+由理论力学知：刚体（其联体坐标系为 $\{B\}$）在参考坐标系 $\{A\}$ 中的任何运动都可以分解为：
+
+- 点 ${}^A O_B$ 的运动
+- 刚体绕 ${}^A O_B$ 的定点转动
+
+由理论力学知：
+
+- 在任一瞬间，$\{B\}$ 在 $\{A\}$ 中的定点转动可以看作是绕瞬时转动轴（简称瞬轴，瞬轴上的每个点在该瞬时相对于 $\{A\}$ 的速度为零）的转动。
+- 瞬轴的位置可随时间变化，但原点始终在瞬轴上。
+
+在 $\{A\}$ 中描述 $\{B\}$ 的定点转动可用角速度向量 ${}^A\Omega_B$ 表示：
+
+- ${}^A\Omega_B$ 的方向是瞬轴在 $\{A\}$ 中的方向；
+- ${}^A\Omega_B$ 的大小表示在 $\{A\}$ 中 $\{B\}$ 绕瞬轴的旋转速度。
+
+
+
+
+### 线速度变化
+
+**纯平移的线速度变化**
+
+$$
+^A\mathbf{V}_Q = {^A\mathbf{V}_{BORG}} + {^A_B}\mathbf{R}{^B\mathbf{V}_Q} 
+$$
+
+**一般运动的线速度变化**
+
+!!! note "公式推导"
+    ${}^A_B \dot{R} = {}^A_B S \, {}^A_B R = {}^A \mathbf{\Omega}_B \times {}^A_B R $<br>
+    ${}^A_B S = {}^A_B \dot{R} \, {}^A_B R^{-1} = {}^A_B \dot{R} \, {}^A_B R^\top$
+
+
+$$
+^A\mathbf{V}_Q = {^A\mathbf{V}_{BORG}} + {}^A_B\mathbf{\dot{R}}{}^B\mathbf{Q} +^A_B\mathbf{R}  {}^B\mathbf{V}_Q\\
+= {^A\mathbf{V}_{BORG}} + {^A_B}\mathbf{R}{^B\mathbf{V}_Q} + {^A\mathbf{\Omega}_B} \times {^A_B}\mathbf{R}{^B\mathbf{Q}}
+$$
+
+$Q$ 点对 ${A}$ 的线速度为坐标系 ${B}$ 原点的线速度、$Q$ 点在坐标系 ${B}$ 中的线速度和坐标系 ${B}$ 针对坐标系 ${A}$ 旋转形成的 $Q$ 点切向线速度三者的向量合成
+
+### 角速度变化
+
+在参考坐标系 $\{A\}$ 中，坐标系 $\{C\}$ 的角速度 ${}^A\Omega_C$ 可以表示为：
+
+$$
+{}^A\Omega_C = {}^A\Omega_B + {}^A_B R \, {}^B\Omega_C
+$$
+
+在同一坐标系中，角速度可以相加
+
+### 速度传递
+
+!!! note "规律"
+    - 前一个关节的线速度和角速度都要转换到后一个关节上面
+    - 转动型关节会增加角速度的项，平动型关节会增加线速度的项。
+
+**转动型关节**
+
+角速度：连杆 i+1 针对世界坐标系角速度在{i+1}坐标系的表示
+
+$$
+^{i+1}\!\omega_{i+1} = ^{i+1}_i\!R {^i\omega_i} + \dot{\theta}_{i+1} {}^{i+1}\!\hat{Z}_{i+1}\\
+$$
+
+> 其中，$\hat{Z}_{i+1}$ 是轴 $i+1$在 ${i+1}$ 中的表示；${\theta}_{i+1}$ 是转动型关节 $i+1$ 的关节转速。
+
+线速度：连杆i+1 针对世界坐标系线速度在{i+1}坐标系的表示
+
+$$
+{}^{i+1}\!v_{i+1} = {^{i+1}_iR} (^iv_i + ^i\omega_i \times {^iP_{i+1}})
+$$
+
+> 连杆的长度隐含在了 $^iP_{i+1}$ 叉乘项当中
+
+**平动型**
+
+角速度：没有关节转动对下一个关节角速度的影响
+
+$$
+^{i+1}\omega_{i+1} = _i^{i+1}R {^i\omega_i}
+$$
+
+
+线速度：要加一个在轴线上的速度
+
+$$
+^{i+1}v_{i+1} = _i^{i+1}R (^iv_i + ^i\omega_i \times ^iP_{i+1}) + \dot{d_{i+1}} \hat{Z}_{i+1}
+$$
+
+**向外迭代法**
+
+知道了这样的变换方法，就可以从连杆0，变换到连杆N，一个个地计算速度和角速度
+
+### 雅可比矩阵
 
 
 
@@ -199,63 +385,65 @@ $$
 
 - **首先**，我们知道向量叉积 $a \times b$ 的性质是：
 
-  $$
-  \det(x, a, b) = \langle x, a \times b \rangle \quad \text{对于任意 } x \in \mathbb{R}^3。
-  $$
 
-  $$
-  \det(x, a, b) =
-  \begin{vmatrix}
-  x_1 & x_2 & x_3 \\
-  a_1 & a_2 & a_3 \\
-  b_1 & b_2 & b_3
-  \end{vmatrix}
-  $$
-  
-  $$
-  \langle x, a \times b \rangle =  \begin{bmatrix} x_1 & x_2 & x_3 \end{bmatrix}
-  \begin{bmatrix} a_2b_3 - a_3b_2 \\ a_3b_1 - a_1b_3 \\ a_1b_2 - a_2b_1 \end{bmatrix} =   \begin{vmatrix}
-  x_1 & x_2 & x_3 \\
-  a_1 & a_2 & a_3 \\
-  b_1 & b_2 & b_3
-  \end{vmatrix}
-  $$
-  
+$$
+\det(x, a, b) = \langle x, a \times b \rangle \quad \text{对于任意 } x \in \mathbb{R}^3
+$$
+
+
+$$
+\det(x, a, b) =
+\begin{vmatrix}
+x_1 & x_2 & x_3 \\
+a_1 & a_2 & a_3 \\
+b_1 & b_2 & b_3
+\end{vmatrix}
+$$
+
+$$
+\langle x, a \times b \rangle =  \begin{bmatrix} x_1 & x_2 & x_3 \end{bmatrix}
+\begin{bmatrix} a_2b_3 - a_3b_2 \\ a_3b_1 - a_1b_3 \\ a_1b_2 - a_2b_1 \end{bmatrix} =   \begin{vmatrix}
+x_1 & x_2 & x_3 \\
+a_1 & a_2 & a_3 \\
+b_1 & b_2 & b_3
+\end{vmatrix}
+$$
+
 - **现在**，考虑 $R \in SO(3)$：
   
   - 由于 $R$ 是旋转矩阵，满足：
   
-    $$
-    R^T = R^{-1}。
-    $$
-  
+$$
+R^T = R^{-1}。
+$$
+
 - **因此**，有：
   
-  $$
-  \langle x, R(a \times b) \rangle = \langle R^T x, a \times b \rangle = \det(R^{-1}x, a, b)。
-  $$
+$$
+\langle x, R(a \times b) \rangle = \langle R^T x, a \times b \rangle = \det(R^{-1}x, a, b)。
+$$
 
 - **又因为**：
   
-  $$
-  \det(R) = 1，
-  $$
+$$
+\det(R) = 1，
+$$
 
   所以：
 
-  $$
-  \det(R)\det(R^{-1}x, a, b) = \det(x, Ra, Rb) = \langle x, Ra \times Rb \rangle。
-  $$
+$$
+\det(R)\det(R^{-1}x, a, b) = \det(x, Ra, Rb) = \langle x, Ra \times Rb \rangle。
+$$
 
 - **由于对于任意 $x \in \mathbb{R}^3$ 都成立**：
   
-  $$
-  \langle x, R(a \times b) \rangle = \langle x, Ra \times Rb \rangle，
-  $$
+$$
+\langle x, R(a \times b) \rangle = \langle x, Ra \times Rb \rangle，
+$$
 
   根据内积的性质，可得：
 
-  $$
-  R(a \times b) = (Ra) \times (Rb)。
-  $$
+$$
+R(a \times b) = (Ra) \times (Rb)。
+$$
 
