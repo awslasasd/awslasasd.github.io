@@ -45,6 +45,8 @@ typora-copy-images-to: upload
         [归结原理讲解](https://www.bilibili.com/video/BV1Uv41117Rb/?spm_id_from=333.337.search-card.all.click&vd_source=ace17a48ec1787387c4c8d582e6808cb)<br>
         [ID3算法讲解](https://www.bilibili.com/video/BV1Cq4y1S7k1/?spm_id_from=333.337.search-card.all.click&vd_source=ace17a48ec1787387c4c8d582e6808cb)<br>
 
+!!! admonition "下面课程内容是基于98的资料，少做修改，原文请参考[98链接](https://www.cc98.org/topic/5533160)，帅气的RQY"
+
 
 ## 人工智能
 

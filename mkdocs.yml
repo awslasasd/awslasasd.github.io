@@ -252,11 +252,20 @@ nav:
     - 大数据 :
       - 信息安全导论 : Class/Bigdata/C_B01_Information_safety.md
   - Robotics : 
-    - 空中机器人 : Robotics/空中机器人.md
-    - 自动化竞赛实训 : Robotics/自动化竞赛实训.md
-    - 机器人建模与控制 : Robotics/机器人建模与控制.md
-    - 智能电子设备开发 : Robotics/智能电子设备开发.md
-    - 机器学习 : Robotics/机器学习.md
+    - Naviagtion : 
+      - 导航规划 : Robotics/Navigation/R_N01_Navigation_planning.md
+    - Roboticmodel : 
+      - ROS框架 : Robotics/Roboticmodel/R_R01_ROS.md
+      - 机器人建模与控制 : Robotics/Roboticmodel/R_R02_model.md
+      - 空中机器人 : Robotics/Roboticmodel/R_R03_Airrobot.md
+    - CV :
+      - 工业视觉 : Robotics/CV/R_C01_IndustryCV.md
+    - 嵌入式 :
+      - Modbus : Robotics/Embedded/R_E01_Modbus.md
+      - Arduino实践 : Robotics/Embedded/R_E01_arduinoTest.md
+  - CS : 
+    - ML :
+      - 机器学习 : CS/ML/C_M01_ML.md
   - Reproduction :
     - UAV自主探索 : Reproduction/P_01.md
     - FALCON : Reproduction/P_02.md
