@@ -255,8 +255,19 @@ nav:
           - 随堂测试四 : Class/class_source/C_S01/c3.5.md
           - 随堂测试五 : Class/class_source/C_S01/c3.6.md
           - 随堂测试六 : Class/class_source/C_S01/c4.1.md
+          - 24年期中测试一 : Class/class_source/C_S01/midExam24_01.pdf
+          - 24年期中测试二 : Class/class_source/C_S01/midExam24_01.pdf
+          - 23年期中测试 : Class/class_source/C_S01/midExam23.pdf
+          - 复习课 : Class/class_source/C_S01/Review.md
     - 机器学习 :
-      - 人工智能与机器学习 : Class/MachineLearning/C_M01_AI_ML.md
+      - 人工智能与机器学习 : 
+        - 课程内容 : Class/MachineLearning/C_M01_AI_ML.md
+        - 复习资料 :
+            - 双目障碍检测 : Class/class_source/C_M01/LAB1.md
+            - 口罩佩戴检测 : Class/class_source/C_M01/LAB2.md
+            - 机器人自动走迷宫 : Class/class_source/C_M01/LAB3.md
+            - 作家风格识别 : Class/class_source/C_M01/LAB4.md
+            - 期末速通 : Class/class_source/C_M01/Review.md
     - 思政 :
       - 毛概 : Class/Ideological/C_I01_Mao_theories.md
     - 大数据 :
