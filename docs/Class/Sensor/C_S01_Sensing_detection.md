@@ -3538,11 +3538,11 @@ $E = \frac{RT}{nF}ln\frac{P_R}{P_x}$
 
 ### 期中测试
 
-[24年期中测试1](../class_source/C_S01/传感期中测试.pdf)<br>
+[24年期中测试1](../class_source/C_S01/midExam24_01.pdf)<br>
 
-[24年期中测试2](../class_source/C_S01/传感期中测试2.pdf)<br>
+[24年期中测试2](../class_source/C_S01/midExam24_02.pdf)<br>
 
-[23年期中测试(来自wpc学长)](../class_source/C_S01/23年传感期中测试.pdf)<br>
+[23年期中测试(来自wpc学长)](../class_source/C_S01/midExam23.pdf)<br>
 
 ### 期末复习课
 

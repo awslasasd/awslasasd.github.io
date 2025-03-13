@@ -236,15 +236,25 @@ plugins:
 # navigation
 # 注意左右下划线的写法
 nav:
-  - Home : index.md
+  - Home : 
+    - index.md
+    - 友链: links.md
   - Class: 
     - 控制 :
       - 电气控制技术 : Class/Control/C_C01_Electrical_control.md
       - 现代控制原理 : Class/Control/C_C02_Modern_control.md
       - 智能控制技术 : Class/Control/C_C03_Intelligent_control.md
       - 运动控制 : Class/Control/C_C04_Motion_contorl.md
-    - 传感检测 : 
-      - 传感与检测 : Class/Sensor/C_S01_Sensing_detection.md
+    - 检测 : 
+      - 传感与检测 : 
+        - 课程内容 : Class/Sensor/C_S01_Sensing_detection.md
+        - 复习资料 : 
+          - 随堂测试一 : Class/class_source/C_S01/c1.1.md
+          - 随堂测试二 : Class/class_source/C_S01/c3.3.md
+          - 随堂测试三 : Class/class_source/C_S01/c3.4.md
+          - 随堂测试四 : Class/class_source/C_S01/c3.5.md
+          - 随堂测试五 : Class/class_source/C_S01/c3.6.md
+          - 随堂测试六 : Class/class_source/C_S01/c4.1.md
     - 机器学习 :
       - 人工智能与机器学习 : Class/MachineLearning/C_M01_AI_ML.md
     - 思政 :
