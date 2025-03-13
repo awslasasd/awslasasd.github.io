@@ -563,7 +563,7 @@ BS的内部往往是由BFS实现的，如果从初始节点和从目标节点的
 
 [UCS](https://blog.csdn.net/weixin_45021364/article/details/109746913)
 
-[B站视频]([https://www.bilibili.com/video/BV1zz4y1m7Nq/?spm_id_from=333.337.search-card.all.click&vd_source=ace17a48ec1787387c4c8d582e6808cb)
+[B站视频](https://www.bilibili.com/video/BV1zz4y1m7Nq/?spm_id_from=333.337.search-card.all.click&vd_source=ace17a48ec1787387c4c8d582e6808cb)
 
 - 每次从未标记的节点中选取距离出发点最近的节点，标记，收录到最优路径集合中
 - 计算刚加入节点A的邻近节点B的距离，若A的距离+A到B的距离小于B的距离，则更新B的距离

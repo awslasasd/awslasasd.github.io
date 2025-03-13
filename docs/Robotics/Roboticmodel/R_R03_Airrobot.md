@@ -73,7 +73,7 @@ ECEF坐标系与地球固联，位置在地球质心
 
 ### PID技术
 
-观看视频：[PID讲解]([通俗易懂的 PID 控制算法讲解_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1et4y1i7Gm/?spm_id_from=333.337.search-card.all.click&vd_source=ace17a48ec1787387c4c8d582e6808cb))
+观看视频：[PID讲解](https://www.bilibili.com/video/BV1et4y1i7Gm/?spm_id_from=333.337.search-card.all.click&vd_source=ace17a48ec1787387c4c8d582e6808cb)
 
 $K_P$越大，控制系统的响应速度越大，但产生的震荡也越严重
 
@@ -155,7 +155,7 @@ A为起点，G为终点。一开始我们在起点A上，此时并不知道G在�
 
 ### Dijkstra算法
 
-[B站视频]([https://www.bilibili.com/video/BV1zz4y1m7Nq/?spm_id_from=333.337.search-card.all.click&vd_source=ace17a48ec1787387c4c8d582e6808cb)
+[B站视频](https://www.bilibili.com/video/BV1zz4y1m7Nq/?spm_id_from=333.337.search-card.all.click&vd_source=ace17a48ec1787387c4c8d582e6808cb)
 
 - 每次从未标记的节点中选取距离出发点最近的节点，标记，收录到最优路径集合中
 - 计算刚加入节点A的邻近节点B的距离，若A的距离+A到B的距离小于B的距离，则更新B的距离
