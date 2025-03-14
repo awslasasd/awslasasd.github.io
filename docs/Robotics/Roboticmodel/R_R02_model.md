@@ -399,12 +399,328 @@ $$
 !!! note "机械臂末端相对于基坐标系的角速度向量 \(\omega = (\omega_x, \omega_y, \omega_z)^T\) 并不是直接通过对基坐标系下的末端姿态（例如欧拉角）进行求导得到的。"
     当我们使用欧拉角来表示机械臂末端的姿态时，欧拉角是一组描述物体在空间中方向的三个角度。然而，直接对欧拉角进行求导并不能得到正确的角速度向量，因为欧拉角之间存在耦合效应，即一个角度的变化会影响到其他角度的变化。这种耦合效应会导致直接求导得到的角速度向量不准确。
 
+采用向量积法直接求出末端线速度和角速度，可以构造几何雅可比矩阵
+
+假设其他关节固定不动，只有第 $i$ 个关节运动，则由此运动产生的连杆 $N$ 的线速度和角速度如下：
+
+若第 $i$ 个关节为移动关节
+- 线速度 $v_N^{(i)} = \dot{d}_i \hat{Z}_i$
+- 角速度 $\omega_N^{(i)} = 0$
+
+若第 $i$ 个关节为转动关节
+- 线速度 $v_N^{(i)} = \dot{\theta}_i \hat{Z}_i \times (O_N - O_i)$
+- 角速度 $\omega_N^{(i)} = \dot{\theta}_i \hat{Z}_i$
+
+
+!!! note "下图是以$Z_2$为例的图示"
+    注意角速度对末端水平速度的影响是角速度的矢量与关节位置与末端位置的矢量叉乘<br>
+    ![image-20250313151031280](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503131510456.png)
+
+末端实际线速度和角速度就是各关节造成的线速度和角速度的总和：
+
+$$
+v_N = \sum_{i=1}^{N} v_N^{(i)}, \quad \omega_N = \sum_{i=1}^{N} \omega_N^{(i)}
+$$
+
+
+以机械臂**每个关节均为旋转关节**为例构造雅可比矩阵，定义笛卡尔速度向量 $v_N = \begin{pmatrix} v_N \\ \omega_N \end{pmatrix} \in \mathbb{R}^6$ 和关节空间角速度向量 $\dot{\theta} = \begin{pmatrix} \dot{\theta}_1 \\ \dot{\theta}_2 \\ \vdots \\ \dot{\theta}_N \end{pmatrix} \in \mathbb{R}^N$，则有：
+
+$$
+v_N = \begin{pmatrix}
+\dot{Z}_1 \times (O_N - O_1) & \dot{Z}_2 \times (O_N - O_2) & \cdots & \dot{Z}_{N-1} \times (O_N - O_{N-1}) & 0 \\
+\dot{Z}_1 & \dot{Z}_2 & \cdots & \dot{Z}_{N-1} & \dot{Z}_N
+\end{pmatrix} \begin{pmatrix} \dot{\theta}_1 \\ \dot{\theta}_2 \\ \vdots \\ \dot{\theta}_N \end{pmatrix}\\
+= J(\theta) \dot{\theta}
+$$
+
+其中，$J(\theta) \in \mathbb{R}^{6 \times N}$ 即为雅可比矩阵。
+
+
+向量积构造法是计算几何雅可比矩阵的方法之一。对于任意已知的操作臂位形，关节速度和操作臂末端速度的关系是线性的，然而这种线性关系仅仅是瞬时的，因为在下一刻，雅可比矩阵就会有微小的变化。雅可比矩阵是时变的。
+
+**参考坐标系变换下的雅可比矩阵**
+
+若关心 $\{i\}$ 中的笛卡尔速度向量，则有：
+
+$$
+\begin{pmatrix} \dot{v}_N \\ \dot{\omega}_N \end{pmatrix} = \begin{pmatrix} {}^i_0 R & 0 \\ 0 & {}^i_0 R \end{pmatrix} \begin{pmatrix} v_N \\ \omega_N \end{pmatrix} = \begin{pmatrix} {}^i_0 R & 0 \\ 0 & {}^i_0 R \end{pmatrix} J(\theta) \dot{\theta}
+$$
+
+可记变换后的雅可比为：
+
+$$
+{}^i J(\theta) = \begin{pmatrix} {}^i_0 R & 0 \\ 0 & {}^i_0 R \end{pmatrix} J(\theta)
+$$
+
+即：
+
+$$
+\begin{pmatrix} \dot{v}_N \\ \dot{\omega}_N \end{pmatrix} = {}^i J(\theta) \dot{\theta}
+$$
+
+!!! attention "一般来说，雅可比矩阵都会计算到末端，即最后的$\theta$值为0"
+    ![image-20250314182625966](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503141826094.png)<br>
+    如图中所示，计算从Frame{1}——{3},$\dot{\theta_3}=0$，${}^3v_3$和${}^3 \omega_3$均按照之前的推导计算，如下图。<br>
+    ![image-20250314183019508](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503141830595.png)
+
+
+### 逆微分运动学
+
+#### 一些定义
+
+若已知末端执行器笛卡尔空间速度 $v_N$（包括线速度和角速度），产生 $v_N$ 的各关节角速度如下计算：
+
+$$
+\dot{\theta} = J^{-1}(\theta) v_N
+$$
+
+由于对于冗余机械臂和欠驱动机械臂，雅可比矩阵不是方阵，需要考虑雅可比矩阵的伪逆（广义逆）。
+
+若矩阵 $A$ 的维度为 $m \times n (m \neq n)$，且 $A$ 为满秩，则 $A$ 的伪逆（广义逆） $A^+$ 为：
+
+1. 当 $m > n$ 时，$A^+$ 为左逆矩阵，$A^+ = A_{\text{left}}^{-1} = (A^T A)^{-1} A^T$，且 $A^T A$ 满秩。
+2. 当 $m < n$ 时，$A^+$ 为右逆矩阵，$A^+ = A_{\text{right}}^{-1} = A^T (A A^T)^{-1}$，且 $A A^T$ 满秩。
+
+!!! note "冗余机械臂和欠驱动机械臂"
+    | 特性 | 冗余机械臂 | 欠驱动机械臂 |
+    |------|-------------|--------------|
+    | **定义** | 自由度（DOF）大于完成任务所需自由度的机械臂 | 控制输入少于自由度的机械臂，即驱动器数量少于关节数量 |
+    | **自由度与驱动器关系** | 自由度多于任务需求，驱动器数量等于自由度 | 自由度多于驱动器数量 |
+    | **应用场景** | 复杂任务，如避障、优化路径、提高灵活性 | 简化结构、降低成本，适用于抓取不规则物体等 |
+    | **优点** | 提高灵活性、避障能力、优化关节力矩 | 简化结构、降低成本、减少能耗 |
+    | **缺点** | 结构复杂、控制算法复杂、成本较高 | 控制难度大、运动精度受限、灵活性较差 |
+    | **典型应用** | 工业机器人、空间机器人、医疗机器人 | 机器人手爪、水下机器人、服务机器人 |
+    | **控制难度** | 高（需要解决冗余自由度的优化问题） | 高（需要解决欠驱动系统的运动规划和控制问题） |
+
+#### 逆微分运动
+
+若 $A$ 为 $m \times n$ 维矩阵，且 $A$ 为满秩，则线性方程组 $Ax = b$ 的解：
+
+1. 当 $m > n$ 时
+
+方程组是过定的，通常方程组无解。此时，使得 $\|Ax - b\|^2$ 最小的 $x$ 为方程的最小二乘解，由左伪逆计算：
+
+$$
+x^* = A^+ b = A_{\text{left}}^{-1} b = (A^T A)^{-1} A^T b
+$$
+
+例如：
+$$
+\begin{bmatrix} 1 \\ 1 \end{bmatrix} x = \begin{bmatrix} 0 \\ 2 \end{bmatrix}, \quad x^* = \left( \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} \right)^{-1} \begin{bmatrix} 1 & 1 \\ 1 & 2 \end{bmatrix} \begin{bmatrix} 0 \\ 2 \end{bmatrix} = (2)^{-1} \begin{bmatrix} 2 \end{bmatrix} = \begin{bmatrix} 1 \end{bmatrix}
+$$
+
+2. 当 $m < n$ 时
+
+方程组是欠定的，通常方程组可能存在无数个解。此时，所有解中使得 $\|x\|$ 范数最小的 $x$ 为方程的最小范数解，由右伪逆计算：
+
+$$
+x^* = A^+ b = A_{\text{right}}^{-1} b = A^T (A A^T)^{-1} b
+$$
+
+例如：
+
+$$
+\begin{bmatrix} 1 & 1 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = 2, \quad \begin{bmatrix} x_1^* \\ x_2^* \end{bmatrix} = \begin{bmatrix} 1 \\ 1 \end{bmatrix} \left( \begin{bmatrix} 1 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ 1 \end{bmatrix} \right)^{-1} 2 = \begin{bmatrix} 1 \\ 1 \end{bmatrix} (2)^{-1} (2) = \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+$$
+
+
+
+**零空间（Null Space）**
+
+若 $A$ 为 $m \times n$ 维矩阵，则 $A$ 的零空间为线性方程组 $Ax = 0$ 的所有解集合，记为 $N(A) = \{x \in \mathbb{R}^n : Ax = 0\}$
+
+1. 当 $m \geq n$ 时，若 $A$ 为列满秩，$A$ 的零空间只有零向量
+
+$$
+A = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \quad x = 0
+$$
+
+2. 当 $m < n$ 时，若 $A$ 为行满秩，$A$ 的零空间中的向量为
+
+$$
+\tilde{x} = (I - A^+ A)x = (I - A_{\text{right}}^{-1} A)x = (I - A^T (A A^T)^{-1} A)x
+$$
+
+其中，$x$ 为任意 $n$ 维向量
+
+例如：
+
+$$
+A = \begin{bmatrix} 1 & 1 \end{bmatrix}, \quad \tilde{x} = \left( \begin{bmatrix}1 & 0 \\ 0 & 1 \end{bmatrix} - \begin{bmatrix}1/2 \\ 1/2 \end{bmatrix} \begin{bmatrix}1 & 1 \end{bmatrix} \right) \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 1/2 & -1/2 \\ -1/2 & 1/2 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+$$
+
+#### 逆运动学解的情况
+
+在机械臂关节角处于 $\theta$ 时，雅可比矩阵为 $J(\theta)$，由末端执行器的笛卡尔空间速度 $v_N$ 求关节角速度的公式如下：
+
+1. 无冗余
+   
+机械臂操作空间维度等于机械臂关节数，若雅可比矩阵满秩，则
+
+$$
+\dot{\theta} = J^{-1}(\theta) v_N
+$$
+
+2. 冗余
+   
+机械臂操作空间维度小于机械臂关节数，对于末端执行器的某一笛卡尔空间速度，通常会有无穷组对应的关节速度，若雅可比矩阵是行满秩的，其中满足关节速度范数最小的一个特解（最小范数解），用右伪逆计算
+
+$$
+\dot{\theta}_r = J^T (J J)^{-1} v_N
+$$
+
+通解为
+
+$$
+\dot{\theta} = \dot{\theta}_r + \dot{\tilde{\phi}}_f = J^T (J^T)^{-1} v_N + (I - J^T (J^T)^{-1} J) \dot{\phi}_f
+$$
+
+其中 $\phi_f$ 遍历所有的关节速度向量
+
+3. 欠驱动
+   
+机械臂操作空间维度大于机械臂关节数，对于末端执行器的某一笛卡尔空间速度，可能没有对应的关节速度，这时，若雅可比矩阵是列满秩的，只能得到误差范数最小的关节速度（最小二乘解），用左伪逆计算
+
+$$
+\dot{\theta} = (J^T J)^{-1} J^T v_N
+$$
+
+### 奇异性
+
+大多数 $6 \times 6$ 的雅可比矩阵 $J$ 都有使得其不可逆的 $\theta$ 值，这些 $\theta$ 值所对应的位姿称为机构的奇异位形或简称奇异状态。
+
+所有的操作臂在工作空间的边界都存在奇异位形，并且大多数操作臂在它们的工作空间也有奇异位形。
+
+>对于空间机械臂，总有 $\text{rank}(J) \leq \min(6, n)$
+>对于平面机械臂，总有 $\text{rank}(J) \leq \min(2, n)$
+>其中n表示机械臂关节数
+
+=== "空间机械臂"
+    其末端执行器在三维空间中具有6个自由度（3个平移自由度和3个旋转自由度），因此雅可比矩阵 $J$ 的行数为6。雅可比矩阵的秩 $\text{rank}(J)$ 表示机械臂能够独立控制的自由度数量，由于机械臂的关节数 $n$ 限制了其能够独立控制的自由度数量，所以 $\text{rank}(J) \leq \min(6, n)$。
+
+=== "平面机械臂"
+    末端执行器在二维平面中具有3个自由度（2个平移自由度和1个旋转自由度），因此雅可比矩阵 $J$ 的行数为3。但是，由于平面机械臂的旋转轴一直垂直于平面，转角大小为所有转动关节的转角之和，所以实际上平面机械臂的末端执行器在平面内只有2个独立的自由度（2个平移自由度）。因此，平面机械臂的雅可比矩阵 $J$ 的秩 $\text{rank}(J)$ 表示机械臂能够独立控制的自由度数量，由于机械臂的关节数 $n$ 限制了其能够独立控制的自由度数量，所以 $\text{rank}(J) \leq \min(2, n)$。
+
+
+
+对于一般机械臂，奇异位形为令雅可比矩阵 $J$ 不满秩的 $\theta$ 值所构成的位形，此时 $\text{rank}(J(\theta)) < \min(m, n)$。
+
+**奇异点的判断条件**
+
+1. **无冗余（$m=n$）**：在此 $\theta$ 时 $J$ 不可逆，即 $\text{det}(J(\theta))=0$
+2. **冗余（$m<n$）**：在此 $\theta$ 时 $J$ 不行满秩，即 $\text{rank}(J(\theta))<m$
+3. **欠驱动（$m>n$）**：在此 $\theta$ 时 $J$ 不列满秩，即 $\text{rank}(J(\theta))<n$
+
+**注意事项**
+
+对于平面机械臂，由于其末端姿态只有一个旋转自由度，且旋转轴一直垂直于平面，转角大小为所有转动关节的转角之和，所以判断奇异性时，平面机械臂只需关心平面二维线速度部分的雅可比矩阵，即
+
+$$
+\begin{pmatrix} \dot{v}_x \\ \dot{v}_y \end{pmatrix} = J_0 \dot{q}
+$$
+
+因此，对于平面机械臂，上述奇异位形的判断条件需利用雅可比矩阵 $J_0$。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 ## 小测
 
-###  证明，$R(a \times b) = (Ra) \times (Rb)$，其中 $R$ 是旋转矩阵，$a, b \in \mathbb{R}^3$。
+###  Q1-旋转矩阵性质
+
+证明，$R(a \times b) = (Ra) \times (Rb)$，其中 $R$ 是旋转矩阵，$a, b \in \mathbb{R}^3$。
 
 **定义法证明补全**  
 
