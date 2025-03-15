@@ -182,11 +182,48 @@ $$
 \end{pmatrix}
 $$
 
+
+## 逆运动学
+
+
+### 数值解
+
+**牛顿-拉夫逊迭代**
+
+给定N自由度机器人期望的齐次变换矩阵 $T^d$，求关节变量 $\Phi = [\phi_1 \quad \phi_2 \quad \cdots \quad \phi_N]^T$ 使得：
+
+$$
+{}^0 T = {}^0 T_1(\phi_1) \cdot {}^1 T_2(\phi_2) \cdots \cdots {}^N-1 T(\phi_N) = T^d
+$$
+
+记末端执行器的位姿为 $X(\Phi)$，期望位姿为 $X^d$，则问题转化为求关节向量 $\Phi$ 满足 $X(\Phi) = X^d$。利用牛顿-拉夫逊（Newton-Raphson）法可以迭代求解上述方程。
+
+记期望的关节变量为 $\Phi^d$，即 $X(\Phi^d) = X^d$，牛顿-拉夫逊法是从一个猜测的初始关节变量 $\Phi^0$ 开始，迭代计算 $\Phi^k$，最终逼近 $\Phi^d$。过程中需要利用末端位姿关于关节变量的微分，这正是分析雅可比矩阵。
+
+记 $\delta \Phi^k = \Phi^d - \Phi^k$，$\delta X(\Phi^k) = X(\Phi^d) - X(\Phi^k)$，则由一阶泰勒展开近似得到：
+
+$$
+X(\Phi^d) = X(\Phi^k) + \frac{\partial X}{\partial \Phi}(\Phi^k) \delta \Phi^k + O((\delta \Phi^k)^2)
+$$
+
+$$
+\delta X(\Phi^k) = \frac{\partial X}{\partial \Phi}(\Phi^k) \delta \Phi^k = J_a(\Phi^k) \delta \Phi^k
+$$
+
+由此得到迭代计算式：
+
+$$
+\Phi^{k+1} = \Phi^k + J_a^{-1}(\Phi^k) \delta X(\Phi^k)
+$$
+
+
 ## 微分运动学与静力学
 
-### 定义
+### 微分运动学
 
-#### 符号表示
+#### 定义
+
+##### 符号表示
 
 |       符号       |            含义             |              注意               |
 | :--------------: | :-------------------------: | :-----------------------------: |
@@ -202,7 +239,7 @@ $$
     $^A\omega _c = {}^A_U\mathbf{R} \omega _c = {}^A_U\mathbf{R} ^U\Omega _{CORG} \ne ^A \Omega _{CORG}$<br>
     $B'$坐标系其实是与A坐标系原点相同，姿态与B坐标系相同的一个新的坐标系<br>
 
-#### 矩阵定义
+##### 矩阵定义
 
 $$
 S = \dot{R}R^\top = \dot{R}R^{-1}
@@ -230,7 +267,7 @@ $$
 
 
 
-#### 线速度向量
+##### 线速度向量
 
 若 \( {}^B\mathbf{Q} \) 是描述某个点的位置矢量，该点关于{B}的速度是 \( {}^B\mathbf{V}_Q \)。
 
@@ -260,7 +297,7 @@ $$
     \end{align*}
     $$
 
-### 角速度向量
+#### 角速度向量
 
 刚体的定点转动：刚体绕体内或其外延部分的一固定点旋转
 
@@ -292,7 +329,7 @@ $$
 
 
 
-### 线速度变化
+#### 线速度变化
 
 **纯平移的线速度变化**
 
@@ -314,7 +351,7 @@ $$
 
 $Q$ 点对 ${A}$ 的线速度为坐标系 ${B}$ 原点的线速度、$Q$ 点在坐标系 ${B}$ 中的线速度和坐标系 ${B}$ 针对坐标系 ${A}$ 旋转形成的 $Q$ 点切向线速度三者的向量合成
 
-### 角速度变化
+#### 角速度变化
 
 在参考坐标系 $\{A\}$ 中，坐标系 $\{C\}$ 的角速度 ${}^A\Omega_C$ 可以表示为：
 
@@ -324,7 +361,7 @@ $$
 
 在同一坐标系中，角速度可以相加
 
-### 速度传递
+#### 速度传递
 
 !!! note "规律"
     - 前一个关节的线速度和角速度都要转换到后一个关节上面
@@ -385,7 +422,7 @@ $$
     雅可比矩阵可看成是X中的速度向Y中速度的映射。<br>
     $J(X)$是一个时变的线性变换。<br>
 
-#### 几何雅可比矩阵
+##### 几何雅可比矩阵
 
 几何雅可比矩阵描述了操作臂的关节速度 $\dot{\theta}$ 与末端速度（包括线速度和角速度）$v = \begin{pmatrix} v \\ \omega \end{pmatrix}$ 之间的映射关系矩阵 $J(\theta)$。
 
@@ -505,6 +542,7 @@ x^* = A^+ b = A_{\text{left}}^{-1} b = (A^T A)^{-1} A^T b
 $$
 
 例如：
+
 $$
 \begin{bmatrix} 1 \\ 1 \end{bmatrix} x = \begin{bmatrix} 0 \\ 2 \end{bmatrix}, \quad x^* = \left( \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} \right)^{-1} \begin{bmatrix} 1 & 1 \\ 1 & 2 \end{bmatrix} \begin{bmatrix} 0 \\ 2 \end{bmatrix} = (2)^{-1} \begin{bmatrix} 2 \end{bmatrix} = \begin{bmatrix} 1 \end{bmatrix}
 $$
@@ -555,6 +593,7 @@ $$
 
 1. 无冗余
    
+
 机械臂操作空间维度等于机械臂关节数，若雅可比矩阵满秩，则
 
 $$
@@ -563,6 +602,7 @@ $$
 
 2. 冗余
    
+
 机械臂操作空间维度小于机械臂关节数，对于末端执行器的某一笛卡尔空间速度，通常会有无穷组对应的关节速度，若雅可比矩阵是行满秩的，其中满足关节速度范数最小的一个特解（最小范数解），用右伪逆计算
 
 $$
@@ -579,13 +619,14 @@ $$
 
 3. 欠驱动
    
+
 机械臂操作空间维度大于机械臂关节数，对于末端执行器的某一笛卡尔空间速度，可能没有对应的关节速度，这时，若雅可比矩阵是列满秩的，只能得到误差范数最小的关节速度（最小二乘解），用左伪逆计算
 
 $$
 \dot{\theta} = (J^T J)^{-1} J^T v_N
 $$
 
-### 奇异性
+#### 奇异性
 
 大多数 $6 \times 6$ 的雅可比矩阵 $J$ 都有使得其不可逆的 $\theta$ 值，这些 $\theta$ 值所对应的位姿称为机构的奇异位形或简称奇异状态。
 
@@ -596,73 +637,302 @@ $$
 >其中n表示机械臂关节数
 
 === "空间机械臂"
-    其末端执行器在三维空间中具有6个自由度（3个平移自由度和3个旋转自由度），因此雅可比矩阵 $J$ 的行数为6。雅可比矩阵的秩 $\text{rank}(J)$ 表示机械臂能够独立控制的自由度数量，由于机械臂的关节数 $n$ 限制了其能够独立控制的自由度数量，所以 $\text{rank}(J) \leq \min(6, n)$。
+    其末端执行器在三维空间中具有6个自由度（3个平移自由度和3个旋转自由度），因此雅可比矩阵 $J$ 的行数为6。
+    
+    雅可比矩阵的秩 $\text{rank}(J)$ 表示机械臂能够独立控制的自由度数量，由于机械臂的关节数 $n$ 限制了其能够独立控制的自由度数量，所以 $\text{rank}(J) \leq \min(6, n)$。
 
 === "平面机械臂"
-    末端执行器在二维平面中具有3个自由度（2个平移自由度和1个旋转自由度），因此雅可比矩阵 $J$ 的行数为3。但是，由于平面机械臂的旋转轴一直垂直于平面，转角大小为所有转动关节的转角之和，所以实际上平面机械臂的末端执行器在平面内只有2个独立的自由度（2个平移自由度）。因此，平面机械臂的雅可比矩阵 $J$ 的秩 $\text{rank}(J)$ 表示机械臂能够独立控制的自由度数量，由于机械臂的关节数 $n$ 限制了其能够独立控制的自由度数量，所以 $\text{rank}(J) \leq \min(2, n)$。
+    末端执行器在二维平面中具有3个自由度（2个平移自由度和1个旋转自由度），因此雅可比矩阵 $J$ 的行数为3。
+    
+    但是，由于平面机械臂的旋转轴一直垂直于平面，转角大小为所有转动关节的转角之和，所以实际上平面机械臂的末端执行器在平面内只有2个独立的自由度（2个平移自由度）。
+    
+    因此，平面机械臂的雅可比矩阵 $J$ 的秩 $\text{rank}(J)$ 表示机械臂能够独立控制的自由度数量，由于机械臂的关节数 $n$ 限制了其能够独立控制的自由度数量，所以 $\text{rank}(J) \leq \min(2, n)$。
 
 
-
-对于一般机械臂，奇异位形为令雅可比矩阵 $J$ 不满秩的 $\theta$ 值所构成的位形，此时 $\text{rank}(J(\theta)) < \min(m, n)$。
 
 **奇异点的判断条件**
+
+对于一般机械臂，奇异位形为令雅可比矩阵 $J$ 不满秩的 $\theta$ 值所构成的位形，此时 $\text{rank}(J(\theta)) < \min(m, n)$。
 
 1. **无冗余（$m=n$）**：在此 $\theta$ 时 $J$ 不可逆，即 $\text{det}(J(\theta))=0$
 2. **冗余（$m<n$）**：在此 $\theta$ 时 $J$ 不行满秩，即 $\text{rank}(J(\theta))<m$
 3. **欠驱动（$m>n$）**：在此 $\theta$ 时 $J$ 不列满秩，即 $\text{rank}(J(\theta))<n$
 
-**注意事项**
+!!! attention 
 
-对于平面机械臂，由于其末端姿态只有一个旋转自由度，且旋转轴一直垂直于平面，转角大小为所有转动关节的转角之和，所以判断奇异性时，平面机械臂只需关心平面二维线速度部分的雅可比矩阵，即
+    对于平面机械臂，由于其末端姿态只有一个旋转自由度，且旋转轴一直垂直于平面，转角大小为所有转动关节的转角之和，所以判断奇异性时，平面机械臂只需关心平面二维线速度部分的雅可比矩阵，即
+    
+    $$
+    \begin{pmatrix} \dot{v}_x \\ \dot{v}_y \end{pmatrix} = J_0 \dot{q}
+    $$
+    
+    因此，对于平面机械臂，上述奇异位形的判断条件需利用雅可比矩阵 $J_0$。
+
+
+
+奇异位形大致分为两类：
+
+ 1. 边界奇异性
+    工作空间边界的奇异位形。出现在操作臂完全展开或者收回使得末端执行器处于或非常接近空间边界的情况。
+
+ 1. 内点奇异性
+    工作空间内部的奇异位形。出现在远离工作空间的边界，通常是由于两个或两个以上的关节轴线共线引起的。
+
+> 当操作臂处于奇异位形时，操作臂的末端在笛卡尔空间中会失去一个或多个自由度，即此时无论选择多大的关节速度，操作臂的末端在笛卡尔空间的某个方向上（或某个子空间中）都不能运动。
+
+#### 可操作度
+
+可操作度是衡量机器人位形与奇异位形距离的一种度量方式
+
+!!! note "由于欠驱动机器人的逆微分运动只有最小二乘解，一般只讨论无冗余和冗余机器人的可操作性问题"
+
+
+### 分析雅可比矩阵
+
+分析雅可比矩阵：通过操作臂末端的最小表示的运动学方程对关节变量的微分计算得到的雅可比矩阵。
+
+令 $X = \begin{pmatrix} P(\theta) \\ \psi(\theta) \end{pmatrix}$ 表示末端执行器的位姿，其中 $P(\theta)$ 为基座坐标系原点到末端执行器坐标系原点的一般向量，$\psi(\theta)$ 为末端执行器坐标系相对于基座坐标系姿态的最小表示（例如固定角表示或欧拉角表示）。
+
+分析雅可比满足以下形式：
 
 $$
-\begin{pmatrix} \dot{v}_x \\ \dot{v}_y \end{pmatrix} = J_0 \dot{q}
+\dot{X} = \begin{pmatrix} \dot{P} \\ \dot{\psi} \end{pmatrix} = J_a(\theta) \dot{\theta}
 $$
 
-因此，对于平面机械臂，上述奇异位形的判断条件需利用雅可比矩阵 $J_0$。
+#### 刚体角速度与欧拉角速率的关系
+
+由 $\dot{R} R R^T = S$ 得到：
+
+$$
+\begin{pmatrix}
+\dot{r}_{11} & \dot{r}_{12} & \dot{r}_{13} \\
+\dot{r}_{21} & \dot{r}_{22} & \dot{r}_{23} \\
+\dot{r}_{31} & \dot{r}_{32} & \dot{r}_{333}
+\end{pmatrix}
+\begin{pmatrix}
+r_{11} & r_{21} & r_{31} \\
+r_{12} & r_{222} & r_{32} \\
+r_{13} & r_{23} & r_{33}
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & -\omega_z & \omega_y \\
+\omega_z & 0 & -\omega_x \\
+-\omega_y & \omega_x & 0
+\end{pmatrix}
+$$
+
+得到：
+
+$$
+\omega_x = \dot{r}_{31} r_{21} + \dot{r}_{32} r_{22} + \dot{r}_{33} r_{23}
+$$
+
+$$
+\omega_y = \dot{r}_{11} r_{31} + \dot{r}_{12} r_{32} + \dot{r}_{13} r_{33}
+$$
+
+$$
+\omega_z = \dot{r}_{21} r_{11} + \dot{r}_{22} r_{12} + \dot{r}_{23} r_{13}
+$$
+
+以 Z-Y-Z 欧拉角表示刚体在基坐标系中的姿态为例，记 $\Psi = (\alpha \beta \gamma)^T$，则旋转矩阵 $R$ 可以表示为：
 
 
+$$
+R = R_{Z Y Z}(\alpha, \beta, \gamma) = R_{Z}(\alpha) R_{Y}(\beta) R_{Z}(\gamma) 
+$$
+
+即：
+
+$$
+R = 
+\begin{pmatrix}
+r_{11} & r_{12} & r_{13} \\
+r_{21} & r_{22} & r_{23} \\
+r_{31} & r_{32} & r_{33}
+\end{pmatrix}
+= 
+\begin{pmatrix}
+cac\beta c\gamma - s\alpha s\gamma & -cac\beta s\gamma - sac\gamma & cas\beta \\
+sac\beta c\gamma + c\alpha s\gamma & -sac\beta s\gamma + c\alpha c\gamma & sac\beta \\
+-s\beta c\gamma & s\beta s\gamma & c\beta
+\end{pmatrix}
+$$
+
+欧拉角速率为 $\dot{\Psi} = (\dot{\alpha} \dot{\beta} \dot{\gamma})^T$
+
+则：
+
+$$
+\omega_x = i_{31} r_{21} + i_{32} r_{22} + i_{33} r_{23} = \left( \frac{\partial r_{31}}{\partial \alpha} r_{21} + \frac{\partial r_{32}}{\partial \alpha} r_{2} + \frac{\partial r_{33}}{\partial \alpha} r_{23} \right) \dot{\alpha} + \left( \frac{\partial r_{31}}{\partial \beta} r_{21} + \frac{\partial r_{32}}{\partial \beta} r_{2} + \frac{\partial r_{33}}{\partial \beta} r_{23} \right) \dot{\beta} + \left( \frac{\partial r_{31}}{\partial \gamma} r_{21} + \frac{\partial r_{32}}{\partial \gamma} r_{2} + \frac{\partial r_{33}}{\partial \gamma} r_{23} \right) \dot{\gamma}
+$$
+
+$$
+= -s\alpha \dot{\beta} + c\alpha s\beta \dot{\gamma} = \left( 0 -s\alpha \quad c\alpha s\beta \right) \dot{\Psi}
+$$
+
+同样有：
+
+$$
+\omega_y = i_{1} r_{31} + i_{12} r_{32} + i_{13} r_{3} = (0 \quad c\alpha \quad s\alpha s\beta) \dot{\Psi}
+$$
+
+$$
+\omega_z = i_{21} r_{11} + i_{2} r_{12} + i_{23} r_{13} = (1 \quad 0 \quad c\beta) \dot{\Psi}
+$$
+
+因此：
+
+$$
+\omega = \begin{pmatrix} \omega_x \\ \omega_y \\ \omega_z \end{pmatrix} = 
+\begin{pmatrix} 
+0 & -s\alpha & c\alpha s\beta \\
+0 & c\alpha & s\alpha s\beta \\
+1 & 0 & c\beta 
+\end{pmatrix} \dot{\Psi}
+$$
+
+其中 $\Psi = (\alpha ~~ \beta ~~ \gamma)^T$
+上述角速度与欧拉角速率的关系公式也称为“欧拉运动学方程”
 
 
+!!! note "分析雅可比与几何雅可比的关系"
+
+    $$
+    J(\theta) \dot{\theta} = \begin{pmatrix} \dot{v} \\ \dot{\omega} \end{pmatrix} = \begin{pmatrix} \dot{P} \\ B_a(\psi) \dot{\psi} \end{pmatrix} = \begin{pmatrix} I & 0 \\ 0 & B_a(\psi) \end{pmatrix} \begin{pmatrix} \dot{P} \\ \dot{\psi} \end{pmatrix} = \begin{pmatrix} I & 0 \\ 0 & B_a(\psi) \end{pmatrix} J_a(\theta) \dot{\theta}
+    $$
+    
+    $$
+    J_a(\theta) = \begin{pmatrix} I & 0 \\ 0 & B_a^{-1}(\psi) \end{pmatrix} J(\theta)
+    $$
+    
+    要求 $B_a$ 矩阵可逆。
+    
+    记 $T_a = \begin{pmatrix} I & 0 \\ 0 & B_a^{-1}(\psi) \end{pmatrix}$ 则 $J_a(\theta) = T_a J(\theta)$
 
 
+### 静力
+
+!!! quote "本章假设"
+    - 由于操作臂底座静止，因此静态平衡只考虑静止。操作臂的自由末端在工作空间推某个物体，该物体未动
+    - 本章静力学不考虑作用在连杆上的重力
+    - 所有的关节和操作臂位形不变化
 
 
+操作臂在静态平衡（静止或匀速直线运动）状态下，考虑力和力矩如何从一个连杆向下一个连杆传递
+
+!!! info "定义"
+      - **力**：3维向量 $f_i = $ 连杆 $i-1$ 施加在连杆 $i$ 上的力。包含大小、方向、作用点三个属性。需要用两个向量来表示一个力
+      - **力矩**：3维向量 $n_i = $ 连杆 $i-1$ 施加在连杆 $i$ 上的力矩。只有大小和方向两个属性。
+
+#### 作用在操作臂上的静力
+
+力 $f$ 对原点 $O$ 的矩在 $i$ 中可表示为 $^iP \times ^if \in \mathbb{R}^3$
+
+矩的大小 $|^iP||^if| \sin \theta = h||^if|$，$\theta$ 是 $^iP$ 与 $^if$ 的夹角，$h$ 是力臂
+
+垂直于 $^iP$ 和 $^if$ 所在平面的矩方向意味着**“矩使刚体产生绕 $^iP \times ^if$ 旋转的趋势”**
+
+![image-20250315193055616](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503151931757.png)
+
+**力偶**
+
+- 两个大小相等、方向相反且不共线的平行力组成的力系
+- 力偶的作用只改变刚体的转动状态，其转动效应可用力偶矩来度量
+
+力偶 $(\vec{f}, -\vec{f})$ 对点 $O$ 的矩：
+
+$$
+\vec{OA} \times \vec{f} + \vec{OB} \times (-\vec{f}) = \vec{BA} \times \vec{f}
+$$
+
+![image-20250315193055616](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503151934828.png)
+
+对刚体上的任何点，力偶矩 $\vec{BA} \times \vec{f}$ 不变
+
+力偶矩向量 $\vec{BA} \times \vec{f}$ 可在刚体上任意转移
+
+!!! example "力的平移"
+    在刚体上作用于A点的力 $\vec{f}$，在刚体上任取一点B，在点B加上一对平衡力 $\vec{f}$ 和 $-\vec{f}$ 构成力偶。作用于点A的 $\vec{f}$ 和作用于点B的 $-\vec{f}$ 构成力偶，其力偶矩 $\vec{BA} \times \vec{f} = $ 作用于点A的 $\vec{f}$ 对点B的矩。
+
+    刚体上作用于A点的力 $\vec{f}$ 可以转换为刚体上作用于B点的力，附加 $\vec{BA} \times \vec{f}$。
+    
+    ![image-20250315194859935](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503151949037.png)
+
+对于静止的机械臂来说，存在力与力矩平衡
+
+对于连杆i收到的力只有两个，将力相加并令其等于零：
+
+$$
+^i f_i - ^i f_{i+1} = 0 \Longrightarrow ^i f_i = ^i f_{i+1}
+$$
+
+对于连杆i收到的力矩有三个，分别是$^i n_i$、$^i n_{i+1}$以及$^i f_{i+1}$作用产生的力矩(由于力${^i f_{i}}$经过原点，因此对连杆i的力矩为0，因此只有三个极距)，将绕坐标系 $i$ 原点的力矩相加：
 
 
+$$
+^i n_i - ^i n_{i+1} - ^i P_{i+1} \times ^i f_{i+1} = 0
+$$
 
+由此得到：
 
+$$
+^i n_i = ^i n_{i+1} + ^i P_{i+1} \times ^i f_{i+1}
+$$
 
+![image-20250315201525429](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503152015539.png)
 
+#### 静力传递
 
+=== "静力传递表达式"
+    $$
+    ^i f_i = ^i_{i+1} R^{(i+1)} f_{i+1}
+    $$
 
+    $$
+    ^i n_i = ^i_{i+1} R^{(i+1)} n_{i+1} + ^i P_{i+1} \times ^i f_i
+    $$
 
+**为了平衡施加在连杆上的力和力矩，需要在关节提供多大的力矩（旋转关节）或力（移动关节）**
 
+旋转关节：
 
+- $f_i$ 不是约束力，它阻止连杆 $i$ 作直线运动，$n_i$ 阻止连杆 $i$ 作旋转运动。在 $\{i\}$ 中对 $n_i$ 进行正交分解，可得到 1 个沿 $\hat{Z}_i$ 的力矩向量和 1 个垂直于 $\hat{Z}_i$ 的力矩向量。
+- 垂直于 $\hat{Z}_i$ 的力矩向量是约束力矩；沿 $\hat{Z}_i$ 的力矩向量是主动力矩，主动力矩需由关节 $i$ 的旋转驱动器提供。
+- 主动力矩可表示为 $\tau_i \hat{Z}_i$，其中 $\tau_i = |n_i| \cos \theta = |n_i| \hat{Z}_i| \cos \theta = n_i^T \hat{Z}_i$。
 
+移动关节：
 
+- $n_i$ 是约束力矩。在 $\{i\}$ 中对 $f_i$ 进行正交分解，得到 1 个主动力和 1 个约束力，需由关节 $i$ 的直线驱动器提供的主动力表示为 $\tau_i \hat{Z}_i$，其中 $\tau_i = f_i^T \hat{Z}_i$。
 
+![image-20250315205755134](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503152057222.png)
 
+!!! example "两连杆操作臂，在末端执行器施加作用力向量 $\vec{F}$，求出所需的关节力矩。"
+    1. 写出各齐次变换矩阵、外力和外力矩
+    - 齐次变换矩阵 
 
+    $$
+    {}^0 T_1 = \begin{pmatrix} c_1 & -s_1 & 0 & 0 \\ s_1 & c_1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}{}^1 ,T_2 = \begin{pmatrix} c_2 & -s_2 & 0 & l_1 \\ s_2 & c_2 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}  {}^2 ,T_3 = \begin{pmatrix} 1 & 0 & 0 & l_2 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}
+    $$
 
+    - 外力和外力矩：
+  
+    $$
+    {}^3 f_3 = \begin{pmatrix} f_x \\ f_y \\ 0 \end{pmatrix}，
+    {}^3 n_3 = \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+    $$
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    2. 从 $\{3\}$ 开始向内迭代 
+    
+    $$
+    ^2 f_2 = ^2_3 R^3 f_3 = \begin{pmatrix} f_x \ f_y \ 0 \end{pmatrix} ,
+    ^2 n_2 = ^2_3 R^3 n_3 + ^2 P_3 \times ^2 f_2 = \begin{pmatrix} l_2 \ 0 \ 0 \end{pmatrix} \times \begin{pmatrix} f_x \ f_y \ 0 \end{pmatrix} = \begin{pmatrix} 0 \ 0 \ l_2 f_y \end{pmatrix}
+    $$
+    
+    $$
+    ^1 f_1 = ^1_2 R^2 f_2 = \begin{pmatrix} c_2 & -s_2 & 0 \ s_2 & c_2 & 0 \ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} f_x \ f_y \ 0 \end{pmatrix} = \begin{pmatrix} c_2 f_x - s_2 f_y \ s_2 f_x + c_2 f_y \ 0 \end{pmatrix}
+    $$
 
 
 
