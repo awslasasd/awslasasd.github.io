@@ -245,6 +245,8 @@ nav:
       - 现代控制原理 : Class/Control/C_C02_Modern_control.md
       - 智能控制技术 : Class/Control/C_C03_Intelligent_control.md
       - 运动控制 : Class/Control/C_C04_Motion_contorl.md
+    - 电气 :
+      - 智能供配电 : Class/EE/C_E01_Power_distribution.md
     - 检测 : 
       - 传感与检测 : 
         - 课程内容 : Class/Sensor/C_S01_Sensing_detection.md
@@ -275,6 +277,7 @@ nav:
   - Robotics : 
     - Naviagtion : 
       - 导航规划 : Robotics/Navigation/R_N01_Navigation_planning.md
+      - 里程估计 : Robotics/Navigation/R_N02_Odometry.md
     - Roboticmodel : 
       - ROS框架 : Robotics/Roboticmodel/R_R01_ROS.md
       - 机器人建模与控制 : Robotics/Roboticmodel/R_R02_model.md

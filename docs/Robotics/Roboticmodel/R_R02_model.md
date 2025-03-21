@@ -915,61 +915,182 @@ $$
     $$
     {}^0 T_1 = \begin{pmatrix} c_1 & -s_1 & 0 & 0 \\ s_1 & c_1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}{}^1 ,T_2 = \begin{pmatrix} c_2 & -s_2 & 0 & l_1 \\ s_2 & c_2 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}  {}^2 ,T_3 = \begin{pmatrix} 1 & 0 & 0 & l_2 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}
     $$
-
+    
     - 外力和外力矩：
-  
+      
     $$
     {}^3 f_3 = \begin{pmatrix} f_x \\ f_y \\ 0 \end{pmatrix}，
     {}^3 n_3 = \begin{pmatrix} 0 \\ 0 \end{pmatrix}
     $$
-
+    
     2. 从 $\{3\}$ 开始向内迭代 
-    
-    $$
-    ^2 f_2 = ^2_3 R^3 f_3 = \begin{pmatrix} f_x \ f_y \ 0 \end{pmatrix} ,
-    ^2 n_2 = ^2_3 R^3 n_3 + ^2 P_3 \times ^2 f_2 = \begin{pmatrix} l_2 \ 0 \ 0 \end{pmatrix} \times \begin{pmatrix} f_x \ f_y \ 0 \end{pmatrix} = \begin{pmatrix} 0 \ 0 \ l_2 f_y \end{pmatrix}
-    $$
-    
-    $$
-    ^1 f_1 = ^1_2 R^2 f_2 = \begin{pmatrix} c_2 & -s_2 & 0 \ s_2 & c_2 & 0 \ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} f_x \ f_y \ 0 \end{pmatrix} = \begin{pmatrix} c_2 f_x - s_2 f_y \ s_2 f_x + c_2 f_y \ 0 \end{pmatrix}
-    $$
 
 
 
+## 轨迹规划
+
+!!! note "路径和轨迹的区别"
+    路径：机器人位形的一个特定序列，而不考虑机器人位形的时间因素<br>
+    轨迹：与何时到达路径中的每个部分有关，强调了时间性和连续性<br>
+
+### 关节空间轨迹规划
+
+以关节角的函数来描述轨迹的轨迹生成方法
+
+**三项式规划**
+
+为获得一条确定的光滑运动曲线，至少需要对 $\phi(t)$ 施加四个约束条件：
+
+1. $\phi(0) = \phi_0$，初始角度为 $\phi_0$。
+2. $\phi(t_f) = \phi_f$，最终角度为 $\phi_f$。
+3. $\dot{\phi}(0) = \dot{\phi}_0$，初始角速度为 $\dot{\phi}_0$。
+4. $\dot{\phi}(t_f) = \dot{\phi}_f$，最终角速度为 $\dot{\phi}_f$。
+
+这些约束条件唯一确定了一个三次多项式 $\phi(t) = a_0 + a_1 t + a_2 t^2 + a_3 t^3$。
+
+解为:
+
+$$
+a_0 = \phi_0 \\
+a_1 = \dot{\phi}_0\\
+a_2 = -\frac{3\phi_0 - 3\phi_f + 2\dot{\phi}_0 t_f + \dot{\phi}_f t_f}{t_f^2}\\
+a_3 = \frac{2\phi_0 - 2\phi_f + \dot{\phi}_0 t_f + \dot{\phi}_f t_f}{t_f^3}
+$$
+
+
+**五次多项式**
+
+五次多项式可以指定$t_0 (= 0)$和$t_f$时刻关节角度和速度以及加速度来规划轨迹：
+
+$$
+\phi(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + a_4t^4 + a_5t^5
+$$
+
+$$
+\dot{\phi}(t) = a_1 + 2a_2t + 3a_3t^2 + 4a_4t^3 + 5a_5t^4
+$$
+
+$$
+\ddot{\phi}(t) = 2a_2t + 6a_3t^2 + 12a_4t^3 + 20a_5t^4
+$$
+
+解为
+
+$$
+a_0 = \phi_0 \\
+a_1 = \dot{\phi}_0 \\
+a_2 = \frac{\ddot{\phi}_0}{2} \\
+a_3 = \frac{20\phi_f - 20\phi_0 - (8\dot{\phi}_f + 12\dot{\phi}_0)t_f - (3\dot{\phi}_0 - \dot{\phi}_f)t_f^2}{2t_f^3} \\
+a_4 = \frac{30\phi_0 - 30\phi_f + (14\dot{\phi}_f + 16\dot{\phi}_0)t_f + (3\dot{\phi}_0 - 2\dot{\phi}_f)t_f^2}{2t_f^4} \\
+a_5 = \frac{12\phi_f - 12\phi_0 - (6\dot{\phi}_f + 6\dot{\phi}_0)t_f - (\dot{\phi}_0 - \dot{\phi}_f)t_f^2}{2t_f^5}
+$$
+
+#### 确定中间点期望关节速度
+
+##### 法一
+
+- 将相邻的关节中间点用直线相连，则该直线的斜率就是两个相邻关节中间点的平均速度
+- 如果某一关节中间点前后两段直线的斜率符号相反，则可将该点的速度取为0，如$\phi_1$和$\phi_3$处
+- 如果某一关节中间点前后两段直线的斜率符号相同，则可将该点的速度取为两者的平均值，如$\phi_2$处
 
 
 
+![image-20250318201033589](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503182010744.png)
 
 
+##### 法二
+
+- 不直接指定关节中间点处的速度，而是以**保证相邻两段三次多项式加速度连续**为原则选取三次多项式系数
+- 考虑三个相邻的关节中间点，依次为$\phi_i$，$\phi_j$和$\phi_k$
+- 连接$\phi_i$和$\phi_j$的三次多项式为
+  
+$$
+\phi_{ij}(t) = a_0 + a_1t + a_2t^2 + a_3t^3, t \in [0, t_{f1}]
+$$
+
+- 连接$\phi_j$和$\phi_k$的三次多项式为
+  
+$$
+\phi_{jk}(t) = b_0 + b_1t + b_2t^2 + b_3t^3, t \in [0, t_{f2}]
+$$
+
+ !!! attention "这里将第二段三次多项式的起始时间定为0，目的是简化系数计算"
+
+满足条件的等式（求解参数）
 
 
+$$
+\phi_{ij}(0) = \phi_i \\
+\phi_{ij}(t_{f1}) = \phi_j \\
+\phi_{jk}(0) = \phi_j \\
+\phi_{jk}(t_{f2}) = \phi_k \\
+\dot{\phi}_{ij}(0) = \dot{\phi}_i \\
+\dot{\phi}_{jk}(t_{f2}) = \dot{\phi}_k \\
+\dot{\phi}_{ij}(t_{f1}) = \dot{\phi}_{jk}(0) \\
+\ddot{\phi}_{ij}(t_{f1}) = \ddot{\phi}_{jk}(0)
+$$
 
+#### 考虑关节中间点的带抛物线过渡的直线段
 
+!!! attention "需检验加速度值是否超过限定"
 
+**一些定义**
 
+>用$j$，$k$和$l$表示三个相邻的路径点
+位于路径点$k$处的拟合区段的时间间隔为$t_k$
+位于点$j$和$k$之间的直线段的时间间隔为$t_{jk}$
+点$j$和$k$之间总的时间间隔为$t_{ajk}$
+直线段的速度为$\dot{\phi}_{jk}$
+点$j$处拟合区段的加速度为$\ddot{\phi}_j$
 
+**内部路径点计算公式**
 
+$$
+\dot{\phi}_{jk} = \frac{\phi_k - \phi_j}{t_{ajk}} \\
+\ddot{\phi}_k = \text{SGN}(\dot{\phi}_{kl} - \dot{\phi}_{jk}) |\ddot{\phi}_k| \\
+t_k = \frac{\dot{\phi}_{kl} - \dot{\phi}_{jk}}{\ddot{\phi}_k} \\
+t_{jk} = t_{ajk} - \frac{1}{2}t_j - \frac{1}{2}t_k
+$$
 
+![image-20250318203554106](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503182035204.png)
 
+**第一个路径点**
 
+- 对于第一个路径段，由$\frac{\phi_2 - \phi_1}{t_{d12} - \frac{1}{2}t_1} = \ddot{\phi}_1 t_1$，取$\ddot{\phi}_1 = \text{SGN}(\phi_2 - \phi_1)|\dot{\phi}_1|$
+  
+- 可计算得到
+  
+$$
+t_1 = t_{d12} - \sqrt{t_{d12}^2 - \frac{2(\phi_2 - \phi_1)}{\ddot{\phi}_1}}
+$$
 
+- 进而
+  
+$$
+\dot{\phi}_{12} = \frac{\phi_2 - \phi_1}{t_{d12} - \frac{1}{2}t_1} \\
+t_{12} = t_{d12} - t_1 - \frac{1}{2}t_2
+$$
 
+![image-20250318203945107](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503182039241.png)
 
+**最后一个路径点**
 
+- 对于最后一个路径段，同样由$\ddot{\phi}_n = \text{SGN}(\phi_{n-1} - \phi_n)|\ddot{\phi}_n|$和$\frac{\phi_{n-1} - \phi_n}{t_{d(n-1)n} - \frac{1}{2}t_n} = \ddot{\phi}_n t_n$
+  
+- 可计算得到
 
+$$
+t_n = t_{d(n-1)n} - \sqrt{t_{d(n-1)n}^2 + \frac{2(\phi_n - \phi_{n-1})}{\ddot{\phi}_n}}
+$$
 
+- 进而
+  
+$$
+\dot{\phi}_{(n-1)n} = \frac{\phi_n - \phi_{n-1}}{t_{d(n-1)n} - \frac{1}{2}t_n} \\
+t_{(n-1)n} = t_{d(n-1)n} - t_n - \frac{1}{2}t_{n-1}
+$$
 
-
-
-
-
-
-
-
-
-
-
-
+![image-20250318204106045](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503182041180.png)
 
 
 
