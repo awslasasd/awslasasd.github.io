@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # AI
 
 ## 如何在windows上安装ChatGPT APP

@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Git
 
 ## 基本指令

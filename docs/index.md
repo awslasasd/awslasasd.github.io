@@ -3,6 +3,7 @@ hide:
     - date
 home: true
 statistics: true
+comments: true
 ---
 
 # o(〃'▽'〃)o Hi!

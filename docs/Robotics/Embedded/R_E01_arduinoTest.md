@@ -1,3 +1,8 @@
+---
+comments: true
+---
+
+
 # Arduino实践(智能电子设备开发)
 
 ???+note "课程资源"

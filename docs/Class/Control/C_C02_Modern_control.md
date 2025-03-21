@@ -1,5 +1,6 @@
 ---
 typora-copy-images-to: ..\..\picture
+comments: true
 ---
 
 # 现代控制原理

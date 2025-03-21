@@ -2,6 +2,7 @@
 comment: True
 glightbox: False
 nostatistics: True
+comments: true
 ---
 
 # 友链

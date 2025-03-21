@@ -1,5 +1,6 @@
 ---
 typora-copy-images-to: ..\..\picture
+comments: true
 ---
 
 # 工业视觉

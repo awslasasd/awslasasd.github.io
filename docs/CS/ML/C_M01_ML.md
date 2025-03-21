@@ -1,5 +1,6 @@
 ---
 typora-copy-images-to: upload
+comments: true
 ---
 
 

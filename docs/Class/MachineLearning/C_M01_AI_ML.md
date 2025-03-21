@@ -1,5 +1,6 @@
 ---
 typora-copy-images-to: upload
+comments: true
 ---
 
 # 人工智能与机器学习

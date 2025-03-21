@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # 发展对象考试
 
 [cc98最全的入党发展对象考试资料](https://www.cc98.org/topic/4996605)

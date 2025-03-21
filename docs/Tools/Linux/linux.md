@@ -1,5 +1,6 @@
 ---
 typora-copy-images-to: ..\..\picture
+comments: true
 ---
 
 # Windows和Ubuntu双系统更改开机默认启动顺序
