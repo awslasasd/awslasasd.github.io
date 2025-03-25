@@ -292,7 +292,7 @@ $$
 ^B(^BV_Q) = ^BV_Q
 $$
 
-!!! note 需要注意，\( {}^A({}^B\mathbf{V}_Q) \) 不同于 \( {}^A\mathbf{V}_Q \)
+!!! note "需要注意，\( {}^A({}^B\mathbf{V}_Q) \) 不同于 \( {}^A\mathbf{V}_Q \)"
 
     $$
     \begin{align*}
@@ -345,7 +345,7 @@ $$
 **一般运动的线速度变化**
 
 !!! note "公式推导"
-    ${}^A_B \dot{R} = {}^A_B S \, {}^A_B R = {}^A \mathbf{\Omega}_B \times {}^A_B R $<br>
+    ${}^A_B \dot{R} = {}^A_B S \, {}^A_B R = {}^A \mathbf{\Omega}_B \times {}^A_B R$
     ${}^A_B S = {}^A_B \dot{R} \, {}^A_B R^{-1} = {}^A_B \dot{R} \, {}^A_B R^\top$
 
 
@@ -1096,6 +1096,56 @@ t_{(n-1)n} = t_{d(n-1)n} - t_n - \frac{1}{2}t_{n-1}
 $$
 
 ![image-20250318204106045](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503182041180.png)
+
+## 机器人动力学
+
+### 加速度的传递
+
+#### 线加速度的传递
+
+我们考虑矢量$^B Q$保持不动，即$^B V_Q = 0$、$^B\dot{V}_Q = 0$，可以得到：
+
+$$
+^A\dot{V}_Q = ^A\dot{V}_{BORG} +  ^A\dot{\Omega}_B \times _B^AR^BQ + ^A\Omega_B \times (^A\Omega_B \times _B^AR^BQ)
+$$
+
+
+!!! note "加速度的传递公式"
+    一般情况：
+    $$
+    ^A\dot{V}_Q = ^A\dot{V}_{BORG} + _B^AR^B\dot{V}_Q + 2^A\Omega_B \times _B^AR^BV_Q +  ^A\dot{\Omega}_B \times _B^AR^BQ + ^A\Omega_B \times (^A\Omega_B \times _B^AR^BQ)
+    $$
+    特殊情况(坐标系A与B的原点重合)
+    $$
+    ^A\dot{V}_Q =  _B^AR^B\dot{V}_Q + 2^A\Omega_B \times _B^AR^BV_Q + ^A\dot{\Omega}_B \times _B^AR^BQ + ^A\Omega_B \times (^A\Omega_B \times _B^AR^BQ)
+    $$
+
+#### 角加速度的传递
+
+具体公式如下：
+
+$$
+^A\Omega_C = ^A\Omega_B + _B^AR^B\Omega_C + ^A\Omega_B \times _B^AR^B\Omega_C
+$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
