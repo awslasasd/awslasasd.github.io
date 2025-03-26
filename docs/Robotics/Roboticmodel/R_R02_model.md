@@ -1128,22 +1128,124 @@ $$
 ^A\Omega_C = ^A\Omega_B + _B^AR^B\Omega_C + ^A\Omega_B \times _B^AR^B\Omega_C
 $$
 
+### 惯性张量
+
+考虑离散的质点构成的刚体，惯性张量矩阵如下:
+
+$$
+^CI = \begin{bmatrix}
+\sum m_i (y_i^2 + z_i^2) & -\sum m_i x_iy_i & -\sum m_i x_iz_i \\
+-\sum m_i x_iy_i & \sum m_i (x_i^2 + z_i^2) & -\sum m_i y_iz_i \\
+-\sum m_i x_iz_i & -\sum m_i y_iz_i & \sum m_i (x_i^2 + y_i^2)
+\end{bmatrix}
+$$
+
+$C^ P = [x_i, y_i, z_i]^T$ ，代表刚体上离散的第i个质点到质心C的矢量，m_i 代表第i个质点的质量
+
+记为：
+
+$$
+^CI = \begin{bmatrix}
+I_{xx} & -I_{xy} & -I_{xz} \\
+-I_{xy} & I_{yy} & -I_{yz} \\
+-I_{xz} & -I_{yz} & I_{zz}
+\end{bmatrix}
+$$
+
+考虑质量连续分布的刚体，用密度函数$\rho(x,y,z)$和微分单元体$dV$的乘积替代点质量，用积分运算替代求和运算，可得：
+
+$$
+I_{xx} = \int_{\mathcal{B}} (y^2 + z^2) \rho(x, y, z) \, dV \\
+I_{yy} = \int_{\mathcal{B}} (x^2 + z^2) \rho(x, y, z) \, dV \\
+I_{zz} = \int_{\mathcal{B}} (x^2 + y^2) \rho(x, y, z) \, dV \\
+I_{xy} = \int_{\mathcal{B}} xy \rho(x, y, z) \, dV \\
+I_{xz} = \int_{\mathcal{B}} xz \rho(x, y, z) \, dV \\
+I_{yz} = \int_{\mathcal{B}} yz \rho(x, y, z) \, dV
+$$
+
+!!! note "惯性张量矩阵的性质"
+    惯性张量是一个对称矩阵
+    惯性张量中的对角元素$I_{xx}$、$I_{yy}$和$I_{zz}$称为惯性矩
+    非对角元素$I_{xy}$、$I_{xz}$和$I_{yz}$称为惯性积
+
+### 牛顿-欧拉动力学方程
+
+**转动型关节**
+
+外推:i: 0 → n
+
+$$
+\begin{align*}
+^{i+1}\omega_{i+1} &= ^{i+1}_i R ^i \omega_i + \dot{\theta}_{i+1}  {}^{i+1}\hat{Z}_{i+1} \\
+^{i+1}\dot{\omega}_{i+1} &= ^{i+1}_i R ^i \dot{\omega}_i + ^{i+1}_i R ^i \omega_i \times \dot{\theta}_{i+1}  {}^{i+1}\hat{Z}_{i+1} + \ddot{\theta}_{i+1}  {}^{i+1}\hat{Z}_{i+1} \\
+^{i+1}\dot{v}_{i+1} &= ^{i+1}_i R (^i \dot{\omega}_i \times ^i P_{i+1} + ^i \omega_i \times (^i \omega_i \times ^i P_{i+1}) + ^i \dot{v}_i) \\
+^{i+1}\dot{v}_{C_{i+1}} &= ^{i+1}\dot{\omega}_{i+1} \times ^{i+1} P_{C_{i+1}} + ^{i+1}\omega_{i+1} \times (^{i+1}\omega_{i+1} \times ^{i+1} P_{C_{i+1}}) + ^{i+1} \dot{v}_{i+1} \\
+^{i+1} F_{i+1} &= m_{i+1} \dot{v}_{C_{i+1}} \\
+^{i+1} N_{i+1} &= {}^{C_{i+1}} I_{i+1} {}^{i+1}\dot{\omega}_{i+1} + {}^{i+1}\dot{\omega}_{i+1} \times {}^{C_{i+1}} I_{i+1} {}^{i+1}\omega_{i+1}
+\end{align*}
+$$
+
+内推:i: n+1 → 1 $\quad \quad$  $^{n+1} f_{n+1} = 0, \ ^{n+1} n_{n+1} = 0$
+
+$$
+\begin{align*}
+^{i} f_i &= ^{i}_{i+1} R ^{i+1} f_{i+1} + ^i F_i \\
+^{i} n_i &= ^i N_i + ^{i}_{i+1} R ^{i+1} n_{i+1} + ^i P_{C_i} \times ^i F_i + ^i P_{i+1} \times ^{i}_{i+1} R ^{i+1} f_{i+1} \\
+\tau_i &= ^i n_i^T  {}^i\hat{Z}_i
+\end{align*}
+$$
 
 
 
+**平动型关节**
+
+外推：
+
+$$
+\begin{align*}
+^{i+1}\omega_{i+1} &= ^{i+1}_i R ^i \omega_i \\
+^{i+1}\dot{\omega}_{i+1} &= ^{i+1}_i R ^i \dot{\omega}_i \\
+^{i+1}\dot{v}_{i+1} &= ^{i+1}_i R [^i \dot{v}_i + ^i \dot{\omega}_i \times ^i P_{i+1} + ^i \omega_i \times (^i \omega_i \times ^i P_{i+1})] + \ddot{d}_{i+1} {}^{i+1}\hat{Z}_{i+1} + 2 ^{i+1} \omega_{i+1} \times ^i \dot{d}_{i+1} {}^{i+1}\hat{Z}_{i+1} \\
+^{i+1}\dot{v}_{C_{i+1}} &= ^{i+1}\dot{\omega}_{i+1} \times ^{i+1} P_{C_{i+1}} + ^{i+1}\omega_{i+1} \times (^{i+1}\omega_{i+1} \times ^{i+1} P_{C_{i+1}}) + ^{i+1} \dot{v}_{i+1} \\
+^{i+1} F_{i+1} &= m_{i+1} \dot{v}_{C_{i+1}} \\
+^{i+1} N_{i+1} &= {}^{C_{i+1}} I_{i+1} {}^{i+1}\dot{\omega}_{i+1} + {}^{i+1}\dot{\omega}_{i+1} \times {}^{C_{i+1}} I_{i+1} {}^{i+1}\omega_{i+1}
+\end{align*}
+$$
+
+内推：
+
+$$
+\begin{align*}
+^{i} f_i &= ^{i}_{i+1} R ^{i+1} f_{i+1} + ^i F_i \\
+^{i} n_i &= ^i N_i + ^{i}_{i+1} R ^{i+1} n_{i+1} + ^i P_{C_i} \times ^i F_i + ^i P_{i+1} \times ^{i}_{i+1} R ^{i+1} f_{i+1} \\
+\tau_i &= ^i f_i^T   {}^{i}\hat{Z}_i
+\end{align*}
+$$
+
+### 拉格朗日法
+
+!!! note "连杆的动能"
+    $$
+    k_i = \frac{1}{2} m_i v_{C_i}^\top v_{C_i} + \frac{1}{2} {^i\omega_i}^\top {^i_c}_i I_i {^i\omega_i}
+    $$
+
+    $$
+    = \frac{1}{2} m_i v_{C_i}^\top v_{C_i} + \frac{1}{2} {\omega_i}^\top {^0_i R}^\top {^c_i} I_i {^0_i R}^\top \omega_i
+    $$
 
 
+方程如下
 
+$$
+M(\Phi)\ddot{\Phi} + C(\Phi, \dot{\Phi})\dot{\Phi} + B\dot{\Phi} + G(\Phi) = \tau
+$$
 
+其中：
 
-
-
-
-
-
-
-
-
+$$
+M(\Phi) = \sum_{i=1}^{2} \left( m_i \left( f_p^{(i)} \right)^\top I_p^{(i)} + \left( f_o^{(i)} \right)^\top {^0_i R}^{c_i} I_i {^0_i R^\top} f_o^{(i)} \right)\\
+B = \text{diag}(b_1, ..., b_N), \quad b_i \text{为折算到关节} i \text{的粘滞摩擦参数}
+$$
 
 
 
