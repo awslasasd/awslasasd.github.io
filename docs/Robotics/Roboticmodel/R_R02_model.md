@@ -1180,7 +1180,7 @@ $$
 ^{i+1}\dot{\omega}_{i+1} &= ^{i+1}_i R ^i \dot{\omega}_i + ^{i+1}_i R ^i \omega_i \times \dot{\theta}_{i+1}  {}^{i+1}\hat{Z}_{i+1} + \ddot{\theta}_{i+1}  {}^{i+1}\hat{Z}_{i+1} \\
 ^{i+1}\dot{v}_{i+1} &= ^{i+1}_i R (^i \dot{\omega}_i \times ^i P_{i+1} + ^i \omega_i \times (^i \omega_i \times ^i P_{i+1}) + ^i \dot{v}_i) \\
 ^{i+1}\dot{v}_{C_{i+1}} &= ^{i+1}\dot{\omega}_{i+1} \times ^{i+1} P_{C_{i+1}} + ^{i+1}\omega_{i+1} \times (^{i+1}\omega_{i+1} \times ^{i+1} P_{C_{i+1}}) + ^{i+1} \dot{v}_{i+1} \\
-^{i+1} F_{i+1} &= m_{i+1} \dot{v}_{C_{i+1}} \\
+^{i+1} F_{i+1} &= m_{i+1} {}^{i+1}\dot{v}_{C_{i+1}} \\
 ^{i+1} N_{i+1} &= {}^{C_{i+1}} I_{i+1} {}^{i+1}\dot{\omega}_{i+1} + {}^{i+1}\dot{\omega}_{i+1} \times {}^{C_{i+1}} I_{i+1} {}^{i+1}\omega_{i+1}
 \end{align*}
 $$
@@ -1205,7 +1205,7 @@ $$
 \begin{align*}
 ^{i+1}\omega_{i+1} &= ^{i+1}_i R ^i \omega_i \\
 ^{i+1}\dot{\omega}_{i+1} &= ^{i+1}_i R ^i \dot{\omega}_i \\
-^{i+1}\dot{v}_{i+1} &= ^{i+1}_i R [^i \dot{v}_i + ^i \dot{\omega}_i \times ^i P_{i+1} + ^i \omega_i \times (^i \omega_i \times ^i P_{i+1})] + \ddot{d}_{i+1} {}^{i+1}\hat{Z}_{i+1} + 2 ^{i+1} \omega_{i+1} \times ^i \dot{d}_{i+1} {}^{i+1}\hat{Z}_{i+1} \\
+^{i+1}\dot{v}_{i+1} &= ^{i+1}_i R [^i \dot{v}_i + ^i \dot{\omega}_i \times ^i P_{i+1} + ^i \omega_i \times (^i \omega_i \times ^i P_{i+1})] + \ddot{d}_{i+1} {}^{i+1}\hat{Z}_{i+1} + 2 ^{i+1} \omega_{i+1} \times  \dot{d}_{i+1} {}^{i+1}\hat{Z}_{i+1} \\
 ^{i+1}\dot{v}_{C_{i+1}} &= ^{i+1}\dot{\omega}_{i+1} \times ^{i+1} P_{C_{i+1}} + ^{i+1}\omega_{i+1} \times (^{i+1}\omega_{i+1} \times ^{i+1} P_{C_{i+1}}) + ^{i+1} \dot{v}_{i+1} \\
 ^{i+1} F_{i+1} &= m_{i+1} \dot{v}_{C_{i+1}} \\
 ^{i+1} N_{i+1} &= {}^{C_{i+1}} I_{i+1} {}^{i+1}\dot{\omega}_{i+1} + {}^{i+1}\dot{\omega}_{i+1} \times {}^{C_{i+1}} I_{i+1} {}^{i+1}\omega_{i+1}
@@ -1240,26 +1240,53 @@ $$
 M(\Phi)\ddot{\Phi} + C(\Phi, \dot{\Phi})\dot{\Phi} + B\dot{\Phi} + G(\Phi) = \tau
 $$
 
-其中：
+$M(\Phi)$公式如下，计算时，可以先计算每一个分量后，再加到一起
 
 $$
-M(\Phi) = \sum_{i=1}^{2} \left( m_i \left( f_p^{(i)} \right)^\top I_p^{(i)} + \left( f_o^{(i)} \right)^\top {^0_i R}^{c_i} I_i {^0_i R^\top} f_o^{(i)} \right)\\
-B = \text{diag}(b_1, ..., b_N), \quad b_i \text{为折算到关节} i \text{的粘滞摩擦参数}
+M(\Phi) = \sum_{i=1}^{2} \left( m_i \left( f_p^{(i)} \right)^\top I_p^{(i)} + \left( f_o^{(i)} \right)^\top {^0_i R}^{c_i} I_i {^0_i R^\top} f_o^{(i)} \right)
 $$
 
+对于参数$B$:$B = \text{diag}(b_1, ..., b_N), \quad b_i \text{为折算到关节} i \text{的粘滞摩擦参数}，一般为0$
+
+对于矩阵$C(\Phi, \dot{\Phi})$,先计算Christoffel 符号，再写出$C(\Phi, \dot{\Phi})$
+
+Christoffel 符号计算公式如下：
+
+$$
+c_{kji} = \frac{1}{2} \left( \frac{\partial m_{ij}}{\partial \phi_k} + \frac{\partial m_{ik}}{\partial \phi_j} - \frac{\partial m_{jk}}{\partial \phi_i} \right)
+$$
+
+矩阵$C$计算如下
+
+$$
+\begin{bmatrix}
+\sum_k c_{k11} \phi_k & \sum_k c_{k21} \phi_k & \cdots & \sum_k c_{kj1} \phi_k & \cdots & \sum_k c_{kN1} \phi_k \\
+\sum_k c_{k12} \phi_k & \sum_k c_{k22} \phi_k & \cdots & \sum_k c_{kj2} \phi_k & \cdots & \sum_k c_{kN2} \phi_k \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+\sum_k c_{k1i} \phi_k & \sum_k c_{k2i} \phi_k & \cdots & \sum_k c_{kji} \phi_k & \cdots & \sum_k c_{kNi} \phi_k \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+\sum_k c_{k1N} \phi_k & \sum_k c_{k2N} \phi_k & \cdots & \sum_k c_{kjN} \phi_k & \cdots & \sum_k c_{kNN} \phi_k \\
+\end{bmatrix}
+$$
+
+最后是矩阵$G$的计算，计算公式如下
 
 
+$$
+g_i(\Phi) = \frac{\partial u}{\partial \theta_i} = -\sum_{j=1}^2 m_j^0 g^T \frac{\partial^0 P_{C_j}}{\partial \theta_i}
+$$
+
+!!! example "例题"
+    ![image-20250329203110490](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503292031740.png)
+
+    ![image-20250329203124612](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503292031751.png)
+
+    ![image-20250329203143361](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503292031511.png)
+
+    ![image-20250329203151896](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503292031021.png)
 
 
-
-
-
-
-
-
-
-
-
+## 运动控制
 
 
 

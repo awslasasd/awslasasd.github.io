@@ -279,6 +279,7 @@ nav:
     - Naviagtion : 
       - 导航规划 : Robotics/Navigation/R_N01_Navigation_planning.md
       - 里程估计 : Robotics/Navigation/R_N02_Odometry.md
+      - 定位 : Robotics/Navigation/R_N03_Localization.md
     - Roboticmodel : 
       - ROS框架 : Robotics/Roboticmodel/R_R01_ROS.md
       - 机器人建模与控制 : Robotics/Roboticmodel/R_R02_model.md
