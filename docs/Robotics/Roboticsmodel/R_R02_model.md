@@ -1280,13 +1280,310 @@ $$
     ![image-20250329203110490](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503292031740.png)
 
     ![image-20250329203124612](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503292031751.png)
-
+    
     ![image-20250329203143361](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503292031511.png)
-
+    
     ![image-20250329203151896](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202503292031021.png)
 
 
 ## 运动控制
+
+!!! abstract "运动控制"
+    独立关节控制在不知道其他关节的情况时，假设干扰为节约信号，其PD以及PID控制适用于机械臂点对点的控制。大多数情况下，要求设计二阶可导的平滑轨迹，可采用带前馈的PID
+    但实际干扰远比阶跃干扰复杂，可以采用计算转矩前馈控制
+
+### 独立关节控制
+
+![image-20250402151630631](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504021516878.png)
+
+关节模型如下：
+
+$$
+J_{ci}\ddot{\theta}_i + B_{ci}\dot{\theta}_i = J_{ci}\dot{\omega}_i + B_{ci}\omega_i = K_{ci}U_{ci} - T_{ci}
+$$
+
+
+式中，关节 \(i\) 的总等效惯量 \(J_{ci}\)、等效阻尼 \(B_{ci}\) 和控制系数 \(K_{ci}\) 的表达式为
+
+$$
+J_{ci} = J_{mi} + \eta_i^2 J_{mi}
+$$
+
+$$
+B_{ci} = b_{mi} + \eta_i^2 b_{mi} + \frac{\eta_i^2 C_{Ti} k_{ci}}{R_{mi}}
+$$
+
+$$
+K_{ci} = \frac{\eta_i C_{Ti} k_{ci}}{R_{mi}}
+$$
+
+从形式上看，单关节模型式是一个控制输入为 \(U_{ci}\)、干扰输入为 \(T_{ci}\)、输出为 \(\theta_i\) 的线性系统。
+
+经过拉式变换之后，可以得到其传递函数模型如下：
+
+$$
+\theta_i(s) = \frac{K_{ci}}{s(J_{ci}s + B_{ci})} U_{ci}(s) - \frac{1}{s(J_{ci}s + B_{ci})} T_{ci}(s)
+$$
+
+![image-20250402152511420](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504021525551.png)
+
+**阶跃输入的PD控制**
+
+模型如下：
+
+$$
+U_{ci}(s) = k_{Pi} \tilde{\theta}_i(s) - k_{Di} \omega_i(s)\\
+其中 \tilde{\theta}_i(s) = \theta_{di}(s) - \theta_i(s)
+$$
+
+![image-20250402153514989](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504021535142.png)
+
+在独立关节PD控制下，当扰动为0时，可以做到阶跃响应无静差
+
+!!! note "欠阻尼、过阻尼、临界阻尼"
+    ![img](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504021627933.png)
+
+**阶跃输入的PID控制**
+
+模型如下
+
+$$
+U_{ci}(s) = \left(k_{Pi} + \frac{k_{Ii}}{s}\right) \tilde{\theta}_i(s) - k_{Di} \omega_i(s)
+$$
+
+![image-20250402184502740](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504021845899.png)
+
+!!! note "稳定性"
+    根据劳斯判据得到，当$K_p$、$K_i$、$K_d$ 均为正系数且满足$(B_{ci} + k_{Di} K_{ci}) k_{Pi} > J_{ci} k_{Ii}$时，独立关节PID控制是稳定且安全的。
+    关于参数选定，在独立关节PID控制中常用的一个策略是先做PD控制设计，即先取 \(k_{Ii} = 0\)，设计 \(k_{Pi}\) 和 \(k_{Di}\) 以达到满意的动态性能，然后在上式约束范围内选择合适的 \(k_{Ii}\)，以在动态性能基本不变的情况下消除静态误差。
+
+**输入二阶可导的PID前馈控制**
+
+[PID+前馈控制](https://blog.csdn.net/u013528298/article/details/80435009)
+
+模型如下：
+
+![image-20250402191301496](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504021913643.png)
+
+前馈的引入是为了完全消除参考输入对偏差的影响
+
+### 转矩前馈控制
+
+先计算出机械臂的动力学模型，根据动力学模型的公式，去带入独立关节控制，推导出实际的干扰项$T_{ci}$的值
+
+如下所示，在上面的前馈控制的基础上加了对干扰项的补偿
+
+$$
+\begin{align*}
+U_{c1}(s) &= \left(k_{P1} + \frac{k_{I1}}{s}\right) \tilde{\theta}_1(s) - k_{D1} \omega_1(s) + \frac{J_{c1}}{K_{c1}} s^2 \theta_{d1}(s) + \left(\frac{B_{c1}}{K_{c1}} + k_{D1}\right) s \theta_{d1}(s) + \frac{1}{K_{c1}} \hat{T}_{c1}(s) \\
+U_{c2}(s) &= \left(k_{P2} + \frac{k_{I2}}{s}\right) \tilde{\theta}_2(s) - k_{D2} \omega_2(s) + \frac{J_{c2}}{K_{c2}} s^2 \theta_{d2}(s) + \left(\frac{B_{c2}}{K_{c2}} + k_{D2}\right) s \theta_{d2}(s) + \frac{1}{K_{c2}} \hat{T}_{c2}(s)
+\end{align*}
+$$
+
+## 集中控制
+
+### 电流反馈
+
+采用电流反馈的方法，转矩与电流成正比,控制律表达如下：
+
+$$
+转矩公式: T_{ei} = C_{Ti} I_{mi}\\
+控制律：U_{ci} = \pi_{pi}(V_{ci} - I_{mi})
+$$
+
+式中，\(V_{ci}\) 为期望电压
+
+关节模型建立如下：
+
+$$
+J_{ci}\dot{\omega}_i + \overline{B}_{ci}\omega_i = \overline{K}_{ci}V_{ci} - T_{ci}
+$$
+
+其中
+
+$$
+\overline{B}_{ci} = b_{ai} + \eta_i^2 b_{mi} + \frac{\eta_i^2 C_{Ti} k_{ei}}{k_{ui} \pi_{pi} + R_{mi}}\\
+\overline{K}_{ci} = \frac{\eta_i C_{Ti} k_{ui} \pi_{pi}}{k_{ui} \pi_{pi} + R_{mi}}
+$$
+
+### 被控对象模型
+
+$$
+M(\Phi) \ddot{\Phi} + C(\Phi, \dot{\Phi}) \dot{\Phi} + L \dot{\Phi} + G(\Phi) = \tau_d
+$$
+
+其中
+
+$$
+L = B + B_e
+$$
+
+**重力补偿PD控制**
+
+控制律：
+
+$$
+\tau_d = \Lambda_P (\Phi_d - \Phi) - \Lambda_D \dot{\Phi} + G(\Phi)
+$$
+
+![image-20250402211309053](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504022113183.png)
+
+!!! note "李雅普诺夫稳定性"
+    ![image-20250403143246675](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504031432863.png)
+
+### 逆动力学控制
+
+一般来说，设计系统的控制律时，把控制器分为基于模型的控制部分和位置矫正部分
+
+例如，对于一个二阶线性系统(质量弹簧阻尼系统)，其动力学模型如下:
+
+$$
+m\ddot{x}+b\dot{x}+kx=f
+$$
+
+假设可检测质量块的位置和速度，则设计控制律：\( f = -k_p x - k_v \dot{x} \)
+
+两式联立，得：\( m\ddot{x} + (b + k_v)\dot{x} + (k + k_p)x = 0 \) 
+
+**$\alpha$-$\beta$分解**
+
+为了消除非线性项的误差，可以采用*$\alpha$-$\beta$分解的方法进行建模，即对f进行处理，抵消掉非线性项
+
+\[ m\ddot{x} + b\dot{x} + kx = f \]
+
+\[ m\ddot{x} + b\dot{x} + kx = \alpha f' + \beta \]
+
+取 \(\beta = b\dot{x} + kx\)，\(\alpha = m\)
+
+\[ \ddot{x} = f' \] 简化为质量模型
+
+同样，设计控制律 \(f' = -k_v \dot{x} - k_p x\)
+
+代入上式，得 \(\ddot{x} + k_v \dot{x} + k_p x = 0\)
+
+根据期望的控制性能确定 \(k_p\) 和 \(k_v\)
+
+![image-20250403204919456](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504032049630.png)
+
+内环控制律
+
+$$
+\begin{cases} 
+M(\Phi)\ddot{\Phi} + C(\Phi, \dot{\Phi})\dot{\Phi} + L\dot{\Phi} + G(\Phi) = \tau_d \\
+\tau_d = M(\Phi)a_{\Phi} + C(\Phi, \dot{\Phi})\dot{\Phi} + L\dot{\Phi} + G(\Phi)
+\end{cases}
+\Rightarrow \ddot{\Phi} = a_{\Phi} \quad 
+$$
+
+对每个双积分系统，可实施“前馈+PD控制”
+
+即 \(a_{\Phi} = \ddot{\Phi}_d + K_P (\Phi_d - \Phi) + K_D (\dot{\Phi}_d - \dot{\Phi})\)
+
+其中\(K_P\) 和 \(K_D\) 是对角矩阵
+
+![image-20250403210903169](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504032109324.png)
+
+逆运动学控制的缺点是系统参数必须是精确已知的。
+
+### 鲁棒控制
+
+对于逆运动学控制的改进——对参数进行合理估计值
+
+故，非线性反馈值变为如下情况：
+
+$$
+\tau_d = \hat{M}(\Phi) a_{\Phi} + \hat{C}(\Phi, \dot{\Phi}) \dot{\Phi} + \hat{L} \dot{\Phi} + \hat{G}(\Phi) \quad (8-95)
+$$
+
+式中，\(\hat{M}(\Phi)\)、\(\hat{C}(\Phi, \dot{\Phi})\)、\(\hat{L}\) 和 \(\hat{G}(\Phi)\) 分别是关于 \(M(\Phi)\)、\(C(\Phi, \dot{\Phi})\)、\(L\) 和 \(G(\Phi)\) 的估计项。记各项估计偏差为
+
+$$
+\begin{align*}
+\bar{M}(\Phi) &= M(\Phi) - \hat{M}(\Phi) \quad (8-96) \\
+\bar{C}(\Phi, \dot{\Phi}) &= C(\Phi, \dot{\Phi}) - \hat{C}(\Phi, \dot{\Phi}) \quad (8-97) \\
+\bar{L} &= L - \hat{L} \quad (8-98) \\
+\bar{G}(\Phi) &= G(\Phi) - \hat{G}(\Phi) \quad (8-99)
+\end{align*}
+$$
+
+因此，鲁棒控制的模型如下：
+
+$$
+M(\Phi)\ddot{\Phi} = M(\Phi)a_{\Phi} - (M(\Phi) - \hat{M}(\Phi))a_{\Phi} - (C(\Phi, \dot{\Phi}) - \hat{C}(\Phi, \dot{\Phi}))\dot{\Phi} - (L - \hat{L})\dot{\Phi} - (G(\Phi) - \hat{G}(\Phi)) \\
+ = M(\Phi)a_{\Phi} - \bar{M}(\Phi)a_{\Phi} - \bar{C}(\Phi, \dot{\Phi})\dot{\Phi} - \bar{L}\dot{\Phi} - \bar{G}(\Phi) \\
+\dot{\Phi} = a_{\Phi} - M^{-1}(\Phi)(\bar{M}(\Phi)a_{\Phi} + \bar{C}(\Phi, \dot{\Phi})\dot{\Phi} + \bar{L}\dot{\Phi} + \bar{G}(\Phi)) = a_{\Phi} - \Delta 
+$$
+
+\(\Delta\) 代表不确定性
+
+外环控制律 \(a_{\Phi} = \ddot{\Phi}_d + K_P (_d - \Phi) + K_D (\dot{\Phi}_d - \dot{\Phi}) + \Xi\)
+
+![image-20250403212346885](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504032123023.png)
+
+### 自适应控制
+
+自适应控制，被控对象模型采用参数线性化形式，即
+
+\[ Y(\Phi, \dot{\Phi}, \ddot{\Phi}) \Psi = M(\Phi) \ddot{\Phi} + C(\Phi, \dot{\Phi}) \dot{\Phi} + L \dot{\Phi} + G(\Phi) = \tau_d \]
+
+式中，\(\Psi\) 包含了机器人未知的全部参数(即，不包含关节角，由未知参数组成的不相关的式子)。
+
+!!! example "自适应控制"
+    ![image-20250403214555932](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504032145080.png)
+
+    ![image-20250403214601516](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504032146665.png)
+
+参数线性化后，基于\(\Psi\)的估计改进逆动力学控制如下:
+
+内环控制律:
+
+\[ \tau_d = Y(\Phi, \dot{\Phi}, \alpha_{\phi}) \hat{\Psi} = \hat{M}(\Phi) \alpha_{\phi} + \hat{C}(\Phi, \dot{\Phi}) \dot{\Phi} + \hat{L} \dot{\Phi} + \hat{G}(\Phi) \]
+
+外环控制律:
+
+\[ a_{\phi} = \ddot{\Phi}_d + K_P (\Phi_d - \Phi) + K_D (\dot{\Phi}_d - \dot{\Phi}) \]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
