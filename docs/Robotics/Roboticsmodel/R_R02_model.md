@@ -715,6 +715,54 @@ $$
 
 !!! note "由于欠驱动机器人的逆微分运动只有最小二乘解，一般只讨论无冗余和冗余机器人的可操作性问题"
 
+若机械臂处于某位形时关节向量为 $\phi$，关节速度取为单位速度向量 $\dot{\phi}_e$，满足 $\dot{\phi}_e^T \dot{\phi}_e = 1$ 此时，机器人末端速度记为 $v_e$，则满足
+
+（1）机器人无冗余：
+
+$$
+v_e^T \left( J(\phi) J(\phi)^T \right)^{-1} v_e = 1
+$$
+
+（2）机器人冗余：
+
+$$
+v_e^T \left( J(\phi) J(\phi)^T \right)^{-1} v_e \leq 1
+$$
+
+当机器人处于某位形时，限制关节速度为单位速度向量，机器人末端速度所构成的空间称作该位形的**可操作椭球体**。
+
+假设机器人有N个关节，末端速度空间的维数为m，要求 $N \geq m$ ，则 $m \times N$ 维雅可比矩阵 $J$ 的奇异值分解为
+
+$$
+J = U \Sigma V^T
+$$
+
+其中 $\Sigma$ 是 $m \times N$ 维矩阵， $\Sigma = \text{diag}(\sigma_1, \sigma_2, \cdots, \sigma_m)$
+
+带入上面的方程得到
+
+$$
+v_e^T \left(JJ^\top\right)^{-1} v_e = \left(U^\top v_e\right)^\top \Sigma^{-2} \left(U^\top v_e\right)
+$$
+
+其中，$\Sigma^{-2} = \text{diag}\left(\sigma_1^{-2}, \sigma_2^{-2}, \cdots, \sigma_m^{-2}\right)$，记 $a = U^\top v_e$ 则
+
+$$
+v_e^T \left(JJ^\top\right)^{-1} v_e = a^\top \Sigma^{-2} a = \sum_{i=1}^m \frac{\alpha_i^2}{\sigma_i^2} \leq 1
+$$
+
+上述是一个标准的椭球体方程，表明机器人此位形的可操作椭球体的轴向量 $\sigma_i u_i$ 给出。
+
+可操作椭球体的体积与雅可比矩阵 $J$ 的奇异值的连乘 $\sigma_1 \sigma_2 \cdots \sigma_m$ 成比例。
+定义机器人处于位形 $\Phi$ 时的**可操作度**为 $\kappa(\Phi)$
+
+$$
+\kappa(\Phi) = \sigma_1 \sigma_2 \cdots \sigma_m = \sqrt{\det(J(\Phi) J^\top(\Phi))}
+$$
+
+（1）在奇异位形，$JJ^\top$ 不是满秩的，因此可操作度 $\kappa = 0$
+
+（2）在非奇异位形，可操作度 $\kappa > 0$，而且 $\kappa$ 越大，机器人改变末端位姿的可操作性越好
 
 ### 分析雅可比矩阵
 
