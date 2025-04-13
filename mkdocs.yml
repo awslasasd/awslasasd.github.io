@@ -282,7 +282,9 @@ nav:
       - 定位 : Robotics/Navigation/R_N03_Localization.md
     - Roboticsmodel : 
       - ROS框架 : Robotics/Roboticsmodel/R_R01_ROS.md
-      - 机器人建模与控制 : Robotics/Roboticsmodel/R_R02_model.md
+      - 机器人建模与控制 : 
+        - 课程内容 : Robotics/Roboticsmodel/R_R02_model.md
+        - 复习资料 : Robotics/class_source/R_R02_review.md
       - 空中机器人 : Robotics/Roboticsmodel/R_R03_Airrobot.md
     - CV :
       - 工业视觉 : Robotics/CV/R_C01_IndustryCV.md

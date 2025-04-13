@@ -1615,6 +1615,14 @@ $$
 
 \[ a_{\phi} = \ddot{\Phi}_d + K_P (\Phi_d - \Phi) + K_D (\dot{\Phi}_d - \dot{\Phi}) \]
 
+## 力控制
+
+
+!!! note "力控制"
+    主动柔顺控制——[CSDN介绍](https://blog.csdn.net/a735148617/article/details/108564836)<br>
+
+### 力位混合控制器
+
 
 
 
