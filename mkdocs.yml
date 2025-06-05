@@ -275,6 +275,9 @@ nav:
       - 发展对象: Class/Ideological/C_I02_PartydevExam.md 
     - 大数据 :
       - 信息安全导论 : Class/Bigdata/C_B01_Information_safety.md
+      - 扫描工具 : Class/Bigdata/C_B02_Scan.md
+      - 蜜罐部署 : Class/Bigdata/C_B03_Honeypot.md
+      - 逆向工程 : Class/Bigdata/C_B04_Reverse.md
   - Robotics : 
     - Naviagtion : 
       - 导航规划 : Robotics/Navigation/R_N01_Navigation_planning.md
