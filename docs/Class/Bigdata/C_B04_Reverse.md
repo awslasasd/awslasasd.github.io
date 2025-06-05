@@ -1,4 +1,8 @@
-# 附加题
+---
+comments: true
+---
+
+# 信息物理系统附加题
 
 !!! note "相关资料"
     [CSDN-UPX魔改壳](https://blog.csdn.net/liKeQing1027520/article/details/142188160?spm=1001.2101.3001.6650.6&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-6-142188160-blog-144810681.235%5Ev43%5Epc_blog_bottom_relevance_base3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-6-142188160-blog-144810681.235%5Ev43%5Epc_blog_bottom_relevance_base3&utm_relevant_index=8)<br>
@@ -9,7 +13,7 @@
 
 先用查壳软件查看，发现加了UPX壳
 
-![](./asserts/C2.1.png)
+![](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202506051439570.png)
 
 从他的提示中可以看到`UPX -> Markus & Laszlo ver. [ LIVV ] <- from file. [ ! Modified ! ] ( sign like UPX packer )` 这个UPX壳是`!Modified`，被修改过，因此直接去壳无法实现，效果如下图所示。
 

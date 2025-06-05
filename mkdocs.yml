@@ -261,6 +261,7 @@ nav:
           - 24年期中测试二 : Class/class_source/C_S01/midExam24_01.pdf
           - 23年期中测试 : Class/class_source/C_S01/midExam23.pdf
           - 复习课 : Class/class_source/C_S01/Review.md
+      - 计算机控制系统 : Class/Sensor/C_S02_PLC.md
     - 机器学习 :
       - 人工智能与机器学习 : 
         - 课程内容 : Class/MachineLearning/C_M01_AI_ML.md
