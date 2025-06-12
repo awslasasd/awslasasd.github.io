@@ -275,6 +275,7 @@ nav:
     - 思政 :
       - 毛概 : Class/Ideological/C_I01_Mao_theories.md
       - 发展对象: Class/Ideological/C_I02_PartydevExam.md 
+      - 习概 : Class/Ideological/C_I03_Xi_theories.md
     - 大数据 :
       - 信息安全导论 : Class/Bigdata/C_B01_Information_safety.md
       - 扫描工具 : Class/Bigdata/C_B02_Scan.md
