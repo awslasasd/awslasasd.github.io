@@ -263,6 +263,9 @@ nav:
           - 复习课 : Class/class_source/C_S01/Review.md
       - 计算机控制系统 : 
         - 课程内容 : Class/Sensor/C_S02_PLC.md
+        - 复习资料 : 
+          - 23-24期末 : Class/class_source/C_S02/23Final.md
+          - 22-23期末 : Class/class_source/C_S02/22Final.md
     - 机器学习 :
       - 人工智能与机器学习 : 
         - 课程内容 : Class/MachineLearning/C_M01_AI_ML.md
