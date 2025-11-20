@@ -245,6 +245,8 @@ nav:
       - 现代控制原理 : Class/Control/C_C02_Modern_control.md
       - 智能控制技术 : Class/Control/C_C03_Intelligent_control.md
       - 运动控制 : Class/Control/C_C04_Motion_contorl.md
+      - 优化方法与应用 : 
+        - 非线性规划 : Class/Control/Optimize/C_C05_01_Nonlinear_program.md
     - 电气 :
       - 智能供配电 : Class/EE/C_E01_Power_distribution.md
     - 检测 : 
@@ -289,6 +291,8 @@ nav:
       - 导航规划 : Robotics/Navigation/R_N01_Navigation_planning.md
       - 里程估计 : Robotics/Navigation/R_N02_Odometry.md
       - 定位 : Robotics/Navigation/R_N03_Localization.md
+    - Multiagent :
+      - 简介 : Robotics/Multiagent/R_M01_Introduction.md
     - Roboticsmodel : 
       - ROS框架 : Robotics/Roboticsmodel/R_R01_ROS.md
       - 机器人建模与控制 : 
