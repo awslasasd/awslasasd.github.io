@@ -307,6 +307,9 @@ nav:
   - CS : 
     - ML :
       - 机器学习 : CS/ML/C_M01_ML.md
+    - DL :
+      - 深度学习 : 
+        - 简介 : CS/DL/C_D01_Introduction.md
   # - Reproduction :
   #   - UAV自主探索 : Reproduction/P_01.md
   #   - FALCON : Reproduction/P_02.md
