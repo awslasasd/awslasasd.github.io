@@ -7,6 +7,8 @@ comments: true
 
 # 机器学习
 
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=113769053358965&bvid=BV1owrpYKEtP&cid=27694664301&p=1&autoplay=0" width="640" height="480" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+
 ## 简介
 
 ### 监督学习
@@ -58,3 +60,23 @@ x -> y
 平方误差代价函数应用最广
 
 ![image-20251029153330585](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202510291533679.png)
+
+cost function最小解
+![image-20251202200856357](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202512022009466.png)
+
+## 梯度下降
+
+$\alpha$ : learning rate
+
+w、b同时更新
+
+![image-20251202210600053](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202512022106182.png)
+
+梯度下降的作用原理
+
+![image-20251202211549001](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202512022115078.png)
+
+
+
+## 向量化
+
