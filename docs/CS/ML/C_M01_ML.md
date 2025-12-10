@@ -80,3 +80,19 @@ w、b同时更新
 
 ## 向量化
 
+![image-20251203134526052](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202512031345142.png)
+
+
+
+特征缩放：
+
+不同特征值取值范围差异过大，可以通过特征缩放来改变，避免梯度下降时搜寻时间过长，曲线曲折
+
+- Feature scaling: 除以最大值
+- Mean normalization:  $x = \frac{x - \mu}{max - min}$
+- Z-score normalization: $x = \frac{x -\mu}{\sigma}$
+
+
+
+![image-20251203144408704](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202512031444783.png)
+
