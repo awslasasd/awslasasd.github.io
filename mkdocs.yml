@@ -306,21 +306,24 @@ nav:
       - Arduino实践 : Robotics/Embedded/R_E01_arduinoTest.md
   - CS : 
     - ML :
-      - 机器学习 : CS/ML/C_M01_ML.md
+      - 内容 : CS/ML/C_M01_ML.md
     - DL :
-      - 深度学习 : 
-        - 简介 : CS/DL/C_D01_Introduction.md
+      - 学习路线简介 : CS/DL/C_D01_Introduction.md
+      - 鱼书 :
+        - 内容简介 : CS/DL/FishBook/C_D02_FB00_Introduction.md
+        - 感知机 : CS/DL/FishBook/C_D02_FB01_Perceptron.md
+        - 神经网络 : CS/DL/FishBook/C_D02_FB02_Neural_network.md
+
   # - Reproduction :
   #   - UAV自主探索 : Reproduction/P_01.md
   #   - FALCON : Reproduction/P_02.md
   - Tools: 
     - Git: Tools/Git.md
     - Createsite : Tools/Createsite.md 
-    - Latex: Tools/latex.md
     - Juypter: Tools/Juypter.md
     - AI: Tools/AI.md
     - OneDrive: Tools/OneDrive.md
-    - Overleaf: Tools/overleaf.md
+    - Latex: Tools/Latex.md
     - Linux :
       - 双系统更改开机顺序 : Tools/Linux/linux.md
       - SSH : Tools/Linux/ssh.md
