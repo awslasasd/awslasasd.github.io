@@ -246,7 +246,8 @@ nav:
       - 智能控制技术 : Class/Control/C_C03_Intelligent_control.md
       - 运动控制 : Class/Control/C_C04_Motion_contorl.md
       - 优化方法与应用 : 
-        - 非线性规划 : Class/Control/Optimize/C_C05_01_Nonlinear_program.md
+        - 非线性规划 : Class/Control/Optimize/C_C05_O01_Nonlinear_program.md
+        - 凸优化 : Class/Control/Optimize/C_C05_O02_Convex_optimization.md
     - 电气 :
       - 智能供配电 : Class/EE/C_E01_Power_distribution.md
     - 检测 : 
