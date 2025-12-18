@@ -50,8 +50,8 @@ $\theta x_{1} + (1-\theta) x_{2}$
 
 !!! note "线性子空间与放射集的关系"
     - 仿射集是子空间的平移，也称**仿射子空间**
-        - 线性方程组$Ax=b$的解集$\Leftrightarrow$仿射集
-        - 几何上是经平移的超平面，称为**仿射超平面** 
+    - 线性方程组$Ax=b$的解集$\Leftrightarrow$仿射集
+    - 几何上是经平移的超平面，称为**仿射超平面** 
 
 ### 凸集
 
@@ -110,7 +110,78 @@ $$
 $$
   \text{conic } S = \left\{ x = \theta_1 x_1 + \dots + \theta_m x_m \mid \theta_i \geq 0, x_i \in S, i=1,\dots,m \right\}
 $$
-  注：锥包是包含$S$的最小凸锥
+
+注：锥包是包含$S$的最小凸锥
+
+### 超平面与半空间
+
+**（仿射）超平面(Hyperplane)**：
+
+$$\{x \mid a^T x = b\}$$
+
+其中$a \neq 0$，仿射维度为$n-1$，也是凸的，过原点的时候是凸锥
+
+**半空间(halfspace)**：
+
+$$\{x \mid a^T x \leq b\}$$
+
+其中$a \neq 0$，半空间是凸集，不是放射集，过原点的时候是凸锥
+
+
+> 系数$a$是超平面的法向量（梯度）！
 
 
 
+### 球和椭球
+
+#### 球
+$$
+B(x_c, r) = \left\{ x \mid \|x - x_c\|_2 < r \right\} = \left\{ x \mid (x - x_c)^T (x - x_c) < r^2 \right\}
+$$
+
+令$\frac{x - x_c}{r} = u$（$r$为半径），则等价于：
+
+$$
+B(x_c, r) = \left\{ x_c + r u \mid \|u\|_2 \leq 1 \right\}
+$$
+
+（单位球的伸缩平移变换，$u^T u \leq 1$对应单位球）
+
+
+
+> 球是凸集
+
+
+
+
+#### 椭球(ellipsoid)
+
+1. 定义形式：
+
+$$
+\mathcal{E}(x_c, P) = \left\{ x \mid (x - x_c)^T P^{-1} (x - x_c) \leq 1 \right\}
+$$
+
+其中$P \in \mathbb{S}_{++}^n$（$P$为**n 阶正定对称矩阵集合**）
+
+2. 等价形式：
+
+$$
+\mathcal{E}(x_c, P) = \left\{ x_c + P^{\frac{1}{2}} u \mid \|u\|_2 \leq 1 \right\}
+$$
+
+令$u = P^{-\frac{1}{2}} (x - x_c)$，则：
+
+$$
+ (x - x_c)^T P^{-1} (x - x_c) = (x - x_c)^T P^{-\frac{1}{2}} P^{-\frac{1}{2}} (x - x_c) = u^T u \leq 1
+$$
+
+椭球半径
+
+对$P^{-1}$做对角化（$P^{-1} = T^T \Lambda^{-1} T$，其中$TT^T = I$为正交矩阵，$\Lambda = \text{diag}(\lambda_1, \dots, \lambda_n)$），令$\hat{x} = T(x - x_c)$，则：
+
+$$
+(x - x_c)^T P^{-1} (x - x_c) = \hat{x}^T \Lambda^{-1} \hat{x} = \sum_{i=1}^n \frac{\hat{x}_i^2}{\left( \sqrt{\lambda_i} \right)^2}
+$$
+
+（通过平移旋转将椭球转化为轴对齐形式，$\sqrt{\lambda_i}$对应各轴半径）
