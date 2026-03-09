@@ -193,6 +193,90 @@ Y = np.dot(X, W) + B
 
 > (2,)是一个1×2的哦，但是(2,3)是2×3的矩阵
 
+![image-20260309200214454](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202603092002573.png)
+
+> 注意，矩阵翻转的同时还要注意转置
+
+$$
+\frac{\partial L}{\partial X}=\frac{\partial L}{\partial Y}\cdot{W^T}\\
+\frac{\partial L}{\partial Y}=X^T\cdot{}\frac{\partial L}{\partial Y}
+$$
+
+**批版本的Affine**
+
+![image-20260309203027254](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202603092030312.png)
+
+这里还有一个细节，正向传播的时候，虽然偏置看上去是一行的，但是实际加到加权和还是根据输入的行数来的，所以偏置实际上是N行的。所以反向传播的时候，传回去还得重新压缩回一行。那就得按列求总和。
+
+```python
+#正向传播
+>>> X_dot_W = np.array([[0, 0, 0], [10, 10, 10]])
+>>> B = np.array([1, 2, 3])
+>>>
+>>> X_dot_W
+array([[ 0, 0, 0],
+[ 10, 10, 10]])
+>>> X_dot_W + B
+array([[ 1, 2, 3],
+[11, 12, 13]])
+```
+
+```python
+#反向传播
+>>> dY = np.array([[1, 2, 3,], [4, 5, 6]])
+>>> dY
+array([[1, 2, 3],
+[4, 5, 6]])
+>>>
+>>> dB = np.sum(dY, axis=0)
+>>> dB
+array([5, 7, 9])
+```
+
+### Softmax-with-Loss 层
+
+> 最后介绍一下输出层的softmax函数。前面我们提到过，softmax函数会将输入值正规化之后再输出
+
+!!! example "手写数字识别"
+    ![image-20260309203647881](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202603092036944.png)
+
+考虑到这里也包含作为损失函数的交叉熵误
+差（cross entropy error），所以称为“Softmax-with-Loss层”，内部结构如下
+
+![image-20260309203820345](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202603092038417.png)
+
+上面的结构有点复杂，下面是简化后的结果
+
+![image-20260309204256652](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202603092042714.png)
+
+Softmax层的反向传播得到了（y1 − t1, y2 − t2, y3 − t3）这样“漂亮”的结果。由于（y1, y2, y3）是Softmax层的输出，（t1, t2, t3）是监督数据，所以（y1 − t1, y2 − t2, y3 − t3）是Softmax层的输出和教师标签的差分。神经网络的反向传播会把这个差分表示的误差传递给前面的层
+
+!!! note "回归问题中输出层使用恒等函数，损失函数使用平方和误差,反向传播才是上面这样漂亮的结果"
+
+```python
+class SoftmaxWithLoss:
+    def __init__(self):
+        self.loss = None
+        self.y = None
+        self.t = None
+    
+    def forward(self, x, t):
+        self.t = t
+        self.y = softmax(x)
+        self.loss = cross_entropy_error(self.y, self.t)
+        return self.loss
+
+    def backward(self, dout=1):
+        batch_size = self.t.shape[0]
+        dx = (self.y - self.t) / batch_size
+        return dx   
+```
+请注意反向传播时，将要传播的值除以批的大小（batch_size）后，传递给前面的层的是单个数据的误差。
+
+
+
+
+
 
 
 
