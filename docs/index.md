@@ -67,13 +67,6 @@ comments: true
   <aside class="home-recent enter" style="--d: 0.08s;">
     <h3>最近在做</h3>
     <div class="home-recent-list">
-      <!-- <a href="Robotics/Navigation/R_N03_Localization/">
-        <img class="home-recent-thumb" src="friends/avatar.png" alt="localization">
-        <span>
-          机器人定位
-          <small>Navigation / Localization</small>
-        </span>
-      </a> -->
       <a href="CS/DL/C_D01_Introduction.md/">
         <img class="home-recent-thumb" src="img/DL.png" alt="backpropagation">
         <span>
@@ -86,6 +79,13 @@ comments: true
         <span>
           LeetCode
           <small>python</small>
+        </span>
+      </a>
+      <a href="Robotics/Navigation/R_N03_Localization/">
+        <img class="home-recent-thumb" src="friends/avatar.png" alt="localization">
+        <span>
+          机器人定位
+          <small>Navigation / Localization</small>
         </span>
       </a>
     </div>
