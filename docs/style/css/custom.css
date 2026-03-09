@@ -132,6 +132,116 @@ h6:before {
 
 /* home page */
 
+body:has(.home-layout) .md-sidebar--primary,
+body:has(.home-layout) .md-sidebar--secondary {
+  display: none;
+}
+
+body:has(.home-layout) .md-main__inner {
+  max-width: 88rem;
+  margin-inline: auto;
+}
+
+/* body:has(.home-layout) .md-source-file {
+  display: none;
+} */
+
+.home-layout {
+  display: grid;
+  grid-template-columns: 15.5rem minmax(0, 1fr) 15.5rem;
+  gap: 1rem;
+  align-items: start;
+}
+
+/* Keep page meta/comments aligned with center column on home */
+body:has(.home-layout) .md-typeset > .home-layout ~ * {
+  width: calc(100% - 33rem);
+  margin-left: calc(15.5rem + 1rem);
+  margin-right: calc(15.5rem + 1rem);
+}
+
+.home-profile,
+.home-recent {
+  position: sticky;
+  top: 5.2rem;
+  padding: 0.95rem;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 0.9rem;
+  background: rgba(17, 26, 46, 0.72);
+}
+
+.home-avatar {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 999px;
+  border: 2px solid rgba(139, 92, 246, 0.45);
+  object-fit: cover;
+}
+
+.home-profile h3,
+.home-recent h3 {
+  margin: 0.7rem 0 0.45rem;
+  font-size: 1rem;
+}
+
+.home-profile h3:before,
+.home-recent h3:before {
+  content: none;
+}
+
+.home-profile-desc {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(219, 234, 254, 0.86);
+}
+
+.home-profile-links {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.home-profile-links a,
+.home-recent a {
+  text-decoration: none !important;
+}
+
+.home-profile-links a {
+  padding: 0.35rem 0.55rem;
+  border-radius: 0.55rem;
+  color: #dbeafe !important;
+  background: rgba(30, 41, 59, 0.7);
+}
+
+.home-recent a {
+  display: block;
+  margin-bottom: 0.5rem;
+  padding: 0.55rem 0.62rem;
+  border-radius: 0.65rem;
+  border: 1px solid transparent;
+  color: #e5ecff !important;
+  background: rgba(30, 41, 59, 0.66);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.home-recent a span,
+.home-recent a small {
+  display: block;
+}
+
+.home-recent a small {
+  opacity: 0.7;
+}
+
+.home-recent a:hover {
+  transform: translateX(2px);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+.home-center {
+  min-width: 0;
+}
+
 .home-hero {
   position: relative;
   margin: 0.6rem 0 1.2rem;
@@ -236,6 +346,22 @@ h6:before {
 }
 
 @media (max-width: 900px) {
+  .home-layout {
+    grid-template-columns: 1fr;
+  }
+
+  body:has(.home-layout) .md-typeset > .home-layout ~ * {
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .home-profile,
+  .home-recent {
+    position: static;
+    top: auto;
+  }
+
   .home-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
