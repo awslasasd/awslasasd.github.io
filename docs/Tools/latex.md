@@ -561,6 +561,5 @@
     "latex-workshop.latex.recipe.default": "lastUsed",
     "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click"
 }
-
-
 ```
+
