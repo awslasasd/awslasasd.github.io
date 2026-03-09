@@ -314,7 +314,7 @@ nav:
         - 内容简介 : CS/DL/FishBook/C_D02_FB00_Introduction.md
         - 感知机 : CS/DL/FishBook/C_D02_FB01_Perceptron.md
         - 神经网络 : CS/DL/FishBook/C_D02_FB02_Neural_network.md
-        - 神经网络学习 : CS/DL/FishBook/C_D02_FB03_NeuralNet_learning.md
+        - 神经网络学习 : CS/DL/FishBook/C_D02_FB03_NeuralNet_Learning.md
         - 反向传播 : CS/DL/FishBook/C_D02_FB04_Backpropagation.md
 
   # - Reproduction :
