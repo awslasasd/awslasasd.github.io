@@ -8,18 +8,20 @@ comments: true
 
 <section class="home-layout">
   <aside class="home-profile enter" style="--d: 0.02s;">
-    <img class="home-avatar" src="https://github.com/awslasasd.png" alt="awslasasd avatar">
-    <h3>awslasasd</h3>
-    <p class="home-profile-desc">机器人与 AI 方向学习者，持续记录课程、项目与工具实践。</p>
-    <div class="home-profile-links">
-      <a href="https://github.com/awslasasd">GitHub</a>
-      <a href="links/">Friends</a>
+    <div class="home-avatar-wrap">
+      <img class="home-avatar" src="img/favicon.ico" alt="awslasasd avatar">
+      <span class="home-avatar-action">:)</span>
+    </div>
+    <h3 class="home-profile-name">Awslasasd</h3>
+    <p class="home-profile-desc">Zhejiang university</p>
+    <div class="home-profile-meta">
+      <span>Major in automation</span>
     </div>
   </aside>
 
   <div class="home-center">
     <section class="home-hero home-hero--v2 enter" style="--d: 0.04s;">
-      <p class="home-badge">Twinkle's Notebook</p>
+      <p class="home-badge">Awslasasd's Notebook</p>
       <h1>
         <span id="typed-title" data-text="Learn, Build, Share">Learn, Build, Share</span>
         <span class="type-cursor" aria-hidden="true">|</span>
@@ -64,18 +66,29 @@ comments: true
 
   <aside class="home-recent enter" style="--d: 0.08s;">
     <h3>最近在做</h3>
-    <a href="Robotics/Navigation/R_N03_Localization/">
-      <span>机器人定位</span>
-      <small>Navigation / Localization</small>
-    </a>
-    <a href="CS/DL/FishBook/C_D02_FB04_Backpropagation/">
-      <span>反向传播</span>
-      <small>Deep Learning / FishBook</small>
-    </a>
-    <a href="Tools/AI/">
-      <span>AI 工具工作流</span>
-      <small>Prompt + Workflow</small>
-    </a>
+    <div class="home-recent-list">
+      <!-- <a href="Robotics/Navigation/R_N03_Localization/">
+        <img class="home-recent-thumb" src="friends/avatar.png" alt="localization">
+        <span>
+          机器人定位
+          <small>Navigation / Localization</small>
+        </span>
+      </a> -->
+      <a href="CS/DL/C_D01_Introduction.md/">
+        <img class="home-recent-thumb" src="img/DL.png" alt="backpropagation">
+        <span>
+          深度学习
+          <small>Deep Learning</small>
+        </span>
+      </a>
+      <a href="Tools/LettCode/">
+        <img class="home-recent-thumb" src="img/leetcode.png" alt="coding">
+        <span>
+          LeetCode
+          <small>python</small>
+        </span>
+      </a>
+    </div>
   </aside>
 </section>
 
@@ -114,8 +127,24 @@ function typeTitle() {
   }, 60);
 }
 
+function updateProfileTime() {
+  var node = document.getElementById("profile-time");
+  if (!node) return;
+  var now = new Date();
+  var hh = String(now.getHours()).padStart(2, "0");
+  var mm = String(now.getMinutes()).padStart(2, "0");
+  var offset = -now.getTimezoneOffset();
+  var sign = offset >= 0 ? "+" : "-";
+  var abs = Math.abs(offset);
+  var oh = String(Math.floor(abs / 60)).padStart(2, "0");
+  var om = String(abs % 60).padStart(2, "0");
+  node.textContent = hh + ":" + mm + " (UTC " + sign + oh + ":" + om + ")";
+}
+
 updateTime();
 typeTitle();
+updateProfileTime();
 document.body.classList.add("home-ready");
 setInterval(updateTime, 60 * 1000);
+setInterval(updateProfileTime, 60 * 1000);
 </script>
