@@ -6,21 +6,24 @@ statistics: true
 comments: true
 ---
 
-<section class="home-hero home-hero--v2">
+<section class="home-hero home-hero--v2 enter" style="--d: 0.02s;">
   <p class="home-badge">Twinkle's Notebook</p>
-  <h1>Learn, Build, Share</h1>
+  <h1>
+    <span id="typed-title" data-text="Learn, Build, Share">Learn, Build, Share</span>
+    <span class="type-cursor" aria-hidden="true">|</span>
+  </h1>
   <p class="home-subtitle">
     一个持续更新的个人知识站点：记录课程学习、机器人探索与实用工具沉淀。
   </p>
   <div class="home-actions">
     <a class="md-button md-button--primary" href="CS/DL/C_D01_Introduction/">进入笔记</a>
-    <a class="md-button" href="https://github.com/awslasasd/awslasasd.github.io/commits/main">更新日志</a>
+    <a class="md-button" href="https://github.com/awslasasd/awslasasd.github.io/commits">更新日志</a>
     <a class="md-button" href="links/">朋友们</a>
     <a class="md-button" href="javascript:toggleStatistics();">站点统计</a>
   </div>
 </section>
 
-<section class="home-grid home-grid--v2">
+<section class="home-grid home-grid--v2 enter" style="--d: 0.1s;">
   <a class="home-card" href="Class/Control/C_C01_Electrical_control/">
     <h3>Class</h3>
     <p>控制、电气、传感与机器学习课程笔记。</p>
@@ -39,7 +42,7 @@ comments: true
   </a>
 </section>
 
-<div id="statistics" class="home-stats" aria-hidden="true">
+<div id="statistics" class="home-stats enter" style="--d: 0.14s;" aria-hidden="true">
   <p>页面总数：{{pages}}</p>
   <p>总字数：{{words}}</p>
   <p>代码行数：{{codes}}</p>
@@ -68,6 +71,21 @@ function toggleStatistics() {
   panel.setAttribute("aria-hidden", String(!panel.classList.contains("is-visible")));
 }
 
+function typeTitle() {
+  var el = document.getElementById("typed-title");
+  if (!el) return;
+  var text = el.getAttribute("data-text") || "";
+  var i = 0;
+  el.textContent = "";
+  var timer = setInterval(function () {
+    el.textContent = text.slice(0, i);
+    i += 1;
+    if (i > text.length) clearInterval(timer);
+  }, 60);
+}
+
 updateTime();
+typeTitle();
+document.body.classList.add("home-ready");
 setInterval(updateTime, 60 * 1000);
 </script>
