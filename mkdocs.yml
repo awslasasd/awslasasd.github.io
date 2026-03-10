@@ -302,7 +302,8 @@ nav:
         - 反向传播 : CS/DL/FishBook/C_D02_FB04_Backpropagation.md
         - 相关技巧 : CS/DL/FishBook/C_D02_FB05_Skills.md
         - 卷积神经网络 : CS/DL/FishBook/C_D02_FB06.Convolutional_Neural_Network.md
-
+      - Transformer :
+        - 内容简介 : CS/DL/Transformer/C_D03_Tf00_Introduction.md
   # - Reproduction :
   #   - UAV自主探索 : Reproduction/P_01.md
   #   - FALCON : Reproduction/P_02.md
@@ -312,7 +313,7 @@ nav:
     - Juypter: Tools/Juypter.md
     - AI: Tools/AI.md
     - OneDrive: Tools/OneDrive.md
-    - Latex: Tools/OneDrive.md
+    - Latex: Tools/latex.md
     - Linux :
       - 双系统更改开机顺序 : Tools/Linux/linux.md
       - SSH : Tools/Linux/ssh.md
