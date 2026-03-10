@@ -68,21 +68,27 @@ comments: true
     <h3>最近在做</h3>
     <div class="home-recent-list">
       <a href="CS/DL/C_D01_Introduction/">
-        <img class="home-recent-thumb" src="img/DL.png" alt="backpropagation">
+        <img class="home-recent-thumb"
+             src="https://images.pexels.com/photos/17483874/pexels-photo-17483874.png?auto=compress&cs=tinysrgb&w=800"
+             alt="deep learning network">
         <span>
           深度学习
           <small>Deep Learning</small>
         </span>
       </a>
       <a href="Tools/LeetCode/T_L00_Introduction/">
-        <img class="home-recent-thumb" src="img/leetcode.png" alt="coding">
+        <img class="home-recent-thumb"
+             src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=800"
+             alt="coding screen">
         <span>
           LeetCode
           <small>python</small>
         </span>
       </a>
       <a href="CS/DL/Transformer/C_D03_Tf00_Introduction/">
-        <img class="home-recent-thumb" src="friends/avatar.png" alt="localization">
+        <img class="home-recent-thumb"
+             src="https://images.pexels.com/photos/34194565/pexels-photo-34194565.jpeg?auto=compress&cs=tinysrgb&w=800"
+             alt="robotic arm">
         <span>
           VLA
           <small>Transformer</small>
