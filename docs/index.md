@@ -30,7 +30,7 @@ comments: true
         一个持续更新的个人知识站点：记录课程学习、机器人探索与实用工具沉淀。
       </p>
       <div class="home-actions">
-        <a class="md-button md-button--primary" href="CS/DL/C_D01_Introduction/">进入笔记</a>
+        <a class="md-button md-button--primary" href="Class/Control/C_C01_Electrical_control/">进入笔记</a>
         <a class="md-button" href="https://github.com/awslasasd/awslasasd.github.io/commits">更新日志</a>
         <a class="md-button" href="links/">朋友们</a>
         <a class="md-button" href="javascript:toggleStatistics();">站点统计</a>
@@ -67,25 +67,25 @@ comments: true
   <aside class="home-recent enter" style="--d: 0.08s;">
     <h3>最近在做</h3>
     <div class="home-recent-list">
-      <a href="CS/DL/C_D01_Introduction.md/">
+      <a href="CS/DL/C_D01_Introduction/">
         <img class="home-recent-thumb" src="img/DL.png" alt="backpropagation">
         <span>
           深度学习
           <small>Deep Learning</small>
         </span>
       </a>
-      <a href="Tools/LettCode/">
+      <a href="Tools/LeetCode/T_L00_Introduction/">
         <img class="home-recent-thumb" src="img/leetcode.png" alt="coding">
         <span>
           LeetCode
           <small>python</small>
         </span>
       </a>
-      <a href="Robotics/Navigation/R_N03_Localization/">
+      <a href="CS/DL/Transformer/C_D03_Tf00_Introduction/">
         <img class="home-recent-thumb" src="friends/avatar.png" alt="localization">
         <span>
-          机器人定位
-          <small>Navigation / Localization</small>
+          VLA
+          <small>Transformer</small>
         </span>
       </a>
     </div>

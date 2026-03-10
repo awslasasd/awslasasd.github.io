@@ -309,6 +309,8 @@ nav:
   #   - FALCON : Reproduction/P_02.md
   - Tools: 
     - Git: Tools/Git.md
+    - Leetcode : 
+      - 简介 : Tools/LeetCode/T_L00_Introduction.md
     - Createsite : Tools/Createsite.md 
     - Juypter: Tools/Juypter.md
     - AI: Tools/AI.md
