@@ -46,6 +46,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://awslasasd.github.io/CS/DL/FishBook/C_D02_FB06.Convolutional_Neural_Network/</loc>
+         <lastmod>2026-03-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://awslasasd.github.io/CS/DL/Transformer/C_D03_Tf00_Introduction/</loc>
+         <lastmod>2026-03-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://awslasasd.github.io/CS/ML/C_M01_ML/</loc>
          <lastmod>2026-03-10</lastmod>
          <changefreq>daily</changefreq>
