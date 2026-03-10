@@ -105,7 +105,7 @@
 
 
 
-# 总体对比
+### 总体对比
 
 | 方法 | 主要特点 | 优点 | 缺点 |
 |---|---|---|---|
@@ -116,7 +116,7 @@
 
 
 
-# 一句话总结
+### 一句话总结
 
 - **SGD**：最朴素，简单但慢。  
 - **Momentum**：给 SGD 加上“惯性”，走得更稳更快。  
@@ -125,7 +125,7 @@
 
 ---
 
-# 实战建议
+### 实战建议
 
 - 想要**最简单、最基础**：用 **SGD**  
 - 想要**比 SGD 更快更稳**：用 **Momentum**  
@@ -133,3 +133,149 @@
 - 想要**开箱即用、通常效果不错**：优先试 **Adam**  
 
 > 一般来说，**Adam 训练更快**，但在某些任务上，**SGD / Momentum 的最终泛化效果可能更好**。
+
+## 权重设置
+
+### sigmod激活函数
+
+与前一层有n个节点连接时，初始值使用标准差为$\frac{1}{\sqrt{n}}$的分布
+
+> w = np.random.randn(node_num, node_num)/np.sqrt(node_num)
+
+### ReLU激活函数
+
+与前一层有n个节点连接时，初始值使用标准差为$\sqrt{\frac{2}{n}}$的分布。2倍是为了让其更有广度，ReLU的负值区域的值为0。
+
+> w = np.random.randn(node_num, node_num)*np.sqrt(2/node_num)
+
+## Batch Normal
+
+Batch Norm有以下优点
+• 可以使学习快速进行（可以增大学习率）。
+• 不那么依赖初始值（对于初始值不用那么神经质）。
+• 抑制过拟合（降低Dropout等的必要性）。
+
+> 为了使各层拥有适当的广度，“强制性”地调整激活值的分布,要向神经网络中插入对数据分布进行正规化的层，即Batch Normalization层
+
+![image-20260310100804144](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202603101008244.png)
+
+定义： 以进行学习时的mini-batch为单位，按mini batch进行正规化。具体而言，就是进行使数据分布的均值为0、方差为1的正规化。
+
+$$
+\begin{align}
+\mu_B&\leftarrow \frac{1}{m}\displaystyle\sum^m_{i=1}x_i\\
+\sigma^2_B&\leftarrow \frac{1}{m}\displaystyle\sum^m_{i=1}(x_i-\mu_B)^2\\
+\hat{x}_i&\leftarrow\frac{x_i-\mu_B}{\sqrt{\sigma^2_B+\varepsilon}}
+\end{align}
+$$
+
+其实就是求出均数，然后标准差，然后让所有值减去均数，然后除以标准差，为了防止标准差为0的情况，所以加上了一个$\varepsilon$微小值放置除0。这样可以减小数据的偏向。
+
+接着Batch Norm层还会对正规化后的数据进行缩放和平移变换。
+
+$$
+y_i\leftarrow\gamma\hat{x}_i+\beta
+$$
+
+这个$\gamma$和$\beta$一开始是1和0，然后也会通过学习进行调整到合适的值。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

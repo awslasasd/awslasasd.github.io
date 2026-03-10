@@ -300,6 +300,8 @@ nav:
         - 神经网络 : CS/DL/FishBook/C_D02_FB02_Neural_network.md
         - 神经网络学习 : CS/DL/FishBook/C_D02_FB03_NeuralNet_Learning.md
         - 反向传播 : CS/DL/FishBook/C_D02_FB04_Backpropagation.md
+        - 相关技巧 : CS/DL/FishBook/C_D02_FB05_Skills.md
+        - 卷积神经网络 : CS/DL/FishBook/C_D02_FB06.Convolutional_Neural_Network.md
 
   # - Reproduction :
   #   - UAV自主探索 : Reproduction/P_01.md
