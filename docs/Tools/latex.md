@@ -1,16 +1,3 @@
-# Latex
-
-## Vscode 与 overleaf远程连接
-
-**Cookies获取**
-
-在overleaf首页中进入开发人员工具
-
-![image-20250414211424214](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504142114503.png)
-
-点击网络，搜索Prject可以看到Cookies
-
-![image-20250414212051281](https://zyysite.oss-cn-hangzhou.aliyuncs.com/202504142120348.png)
 
 
 
