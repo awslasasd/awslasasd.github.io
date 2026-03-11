@@ -304,6 +304,9 @@ nav:
         - 卷积神经网络 : CS/DL/FishBook/C_D02_FB06.Convolutional_Neural_Network.md
       - Transformer :
         - 内容简介 : CS/DL/Transformer/C_D03_Tf00_Introduction.md
+        - 自注意力 : CS/DL/Transformer/C_D03_Tf01_Self_attention.md
+        - Transformer : CS/DL/Transformer/C_D03_Tf02_Transformer.md
+        - Vit : CS/DL/Transformer/C_D03_Tf03_VisionTransformer.md
   # - Reproduction :
   #   - UAV自主探索 : Reproduction/P_01.md
   #   - FALCON : Reproduction/P_02.md
