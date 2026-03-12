@@ -2,6 +2,8 @@
 
 记录一下Transformer的相关知识以及其变种
 
+## Transformer
+
 这个视频从很简单的角度从神经网络一直介绍到Transformer，适合入门观看
 
 <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114011534263076&bvid=BV1uGA3eLEeu&cid=28416214074&p=1&autoplay=0" width="640" height="480" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
@@ -14,9 +16,7 @@ Transformer原论文讲解
 
 <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115269171155173&bvid=BV1r8nMz4EAj&cid=32643157570&p=1&autoplay=0" width="640" height="480" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
-Transformer的变种介绍：
-
-- Vit
+## ViT
 
 15min动画入门
 
@@ -25,7 +25,6 @@ Transformer的变种介绍：
 论文阅读
 
 <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=892100567&bvid=BV15P4y137jb&cid=451711833&p=1&autoplay=0" width="640" height="480" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-
 
 
 
