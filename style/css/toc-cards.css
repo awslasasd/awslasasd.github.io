@@ -1,0 +1,215 @@
+.toc-board {
+  margin: 0.75rem 0 1.2rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.72rem;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--md-default-bg-color) 94%, var(--md-default-fg-color) 6%);
+  font-size: var(--md-nav-font-size, 0.72rem);
+  --toc-tag-col: 12.8rem;
+  --toc-time-col: 7.2rem;
+}
+
+.md-typeset .toc-board .toc-group {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.toc-group + .toc-group {
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.toc-group > summary {
+  list-style: none;
+  cursor: pointer;
+  margin: 0 !important;
+  padding: 0.4rem 0.7rem;
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 1.12;
+  background: color-mix(in srgb, var(--md-default-bg-color) 87%, var(--md-default-fg-color) 13%);
+  border-radius: 0 !important;
+}
+
+.toc-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.toc-group > summary::before {
+  margin-right: 0.24rem;
+}
+
+.toc-group__title {
+  vertical-align: middle;
+}
+
+.toc-group__items {
+  background: color-mix(in srgb, var(--md-default-bg-color) 92%, var(--md-default-fg-color) 8%);
+  border-radius: 0 !important;
+}
+
+.toc-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--toc-tag-col) var(--toc-time-col);
+  gap: 0.46rem;
+  align-items: center;
+  padding: 0.3rem 0.7rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  color: inherit !important;
+  text-decoration: none !important;
+  min-height: 2.42rem;
+}
+
+.toc-entry:hover {
+  background: color-mix(in srgb, var(--md-accent-fg-color) 10%, transparent);
+}
+
+.toc-entry__main {
+  min-width: 0;
+  display: block;
+}
+
+.toc-entry__title {
+  display: block;
+  min-width: 0;
+  font-size: 1em;
+  font-weight: 620;
+  line-height: 1.12;
+}
+
+.toc-entry__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+  margin-top: 0.15rem;
+  font-size: 0.85em;
+  line-height: 1.02;
+  color: var(--md-default-fg-color--light);
+  opacity: 0.82;
+}
+
+.toc-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.14rem;
+  white-space: nowrap;
+}
+
+.toc-meta-icon {
+  display: inline-flex;
+  width: 0.86em;
+  height: 0.86em;
+  color: inherit;
+  opacity: 0.88;
+}
+
+.toc-meta-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.toc-meta-value {
+  font-variant-numeric: tabular-nums;
+}
+
+.toc-entry__tags {
+  display: flex;
+  gap: 0.2rem;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  min-width: 0;
+  width: 100%;
+  justify-self: end;
+}
+
+.toc-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.02rem 0.35rem;
+  font-size: 0.82em;
+  font-weight: 560;
+  line-height: 1;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.toc-pill--note {
+  color: #ffb347;
+  border-color: rgba(255, 179, 71, 0.9);
+}
+
+.toc-pill--review {
+  color: #93c5fd;
+  border-color: rgba(59, 130, 246, 0.85);
+}
+
+.toc-pill--lab {
+  color: #c4b5fd;
+  border-color: rgba(167, 139, 250, 0.85);
+}
+
+.toc-pill--exam {
+  color: #fdba74;
+  border-color: rgba(251, 146, 60, 0.88);
+}
+
+.toc-pill--default {
+  color: var(--md-default-fg-color--light);
+  border-color: var(--md-default-fg-color--lightest);
+}
+
+.toc-entry__time {
+  font-size: 0.9em;
+  font-weight: 520;
+  letter-spacing: 0;
+  color: var(--md-default-fg-color--light);
+  white-space: nowrap;
+  width: 100%;
+  text-align: right;
+  justify-self: end;
+}
+
+@media (max-width: 760px) {
+  .toc-entry {
+    grid-template-columns: 1fr;
+    gap: 0.12rem;
+    min-height: 2.3rem;
+    padding: 0.3rem 0.56rem;
+  }
+
+  .toc-entry__main {
+    display: block;
+    white-space: normal;
+  }
+
+  .toc-entry__title,
+  .toc-entry__meta {
+    display: block;
+  }
+
+  .toc-entry__meta {
+    margin-top: 0.12rem;
+    gap: 0.28rem;
+    flex-wrap: wrap;
+  }
+
+  .toc-entry__tags {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-self: start;
+  }
+
+  .toc-entry__time {
+    justify-self: start;
+    text-align: left;
+  }
+}
