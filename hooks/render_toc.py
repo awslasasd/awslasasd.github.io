@@ -19,6 +19,7 @@ TAG_INFO = {
 }
 
 _GIT_TIME_CACHE = {}
+_GIT_ROOT_CACHE = {}
 
 
 def on_page_markdown(markdown, page, config, files):
@@ -272,34 +273,87 @@ def _get_git_modified_timestamp(src_uri, docs_dir):
     if not src_uri or not docs_dir:
         return None
 
-    cache_key = (docs_dir, src_uri)
+    abs_path = os.path.join(docs_dir, *src_uri.split("/"))
+    repo_root = _get_git_repo_root(docs_dir)
+    if not repo_root:
+        return None
+
+    try:
+        repo_rel_path = os.path.relpath(abs_path, repo_root)
+    except ValueError:
+        return None
+
+    repo_rel_path = repo_rel_path.replace("\\", "/")
+    if repo_rel_path.startswith("../"):
+        return None
+
+    cache_key = (repo_root, repo_rel_path)
     if cache_key in _GIT_TIME_CACHE:
         return _GIT_TIME_CACHE[cache_key]
 
+    commands = [
+        ["git", "log", "-1", "--follow", "--format=%ct", "--", repo_rel_path],
+        ["git", "log", "-1", "--format=%ct", "--", repo_rel_path],
+    ]
+    for cmd in commands:
+        try:
+            result = subprocess.run(
+                cmd,
+                cwd=repo_root,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+        except OSError:
+            continue
+
+        if result.returncode != 0:
+            continue
+
+        output = result.stdout.strip()
+        if output.isdigit():
+            timestamp = float(output)
+            _GIT_TIME_CACHE[cache_key] = timestamp
+            return timestamp
+
+    _GIT_TIME_CACHE[cache_key] = None
+    return None
+
+
+def _get_git_repo_root(docs_dir):
+    if docs_dir in _GIT_ROOT_CACHE:
+        return _GIT_ROOT_CACHE[docs_dir]
+
     try:
         result = subprocess.run(
-            ["git", "log", "-1", "--follow", "--format=%ct", "--", src_uri],
+            ["git", "rev-parse", "--show-toplevel"],
             cwd=docs_dir,
             capture_output=True,
             text=True,
             check=False,
         )
+        if result.returncode == 0:
+            root = result.stdout.strip()
+            if root:
+                _GIT_ROOT_CACHE[docs_dir] = root
+                return root
     except OSError:
-        _GIT_TIME_CACHE[cache_key] = None
-        return None
+        pass
 
-    if result.returncode != 0:
-        _GIT_TIME_CACHE[cache_key] = None
-        return None
+    current = os.path.abspath(docs_dir)
+    while True:
+        if os.path.isdir(os.path.join(current, ".git")) or os.path.isfile(
+            os.path.join(current, ".git")
+        ):
+            _GIT_ROOT_CACHE[docs_dir] = current
+            return current
+        parent = os.path.dirname(current)
+        if parent == current:
+            break
+        current = parent
 
-    output = result.stdout.strip()
-    if not output.isdigit():
-        _GIT_TIME_CACHE[cache_key] = None
-        return None
-
-    timestamp = float(output)
-    _GIT_TIME_CACHE[cache_key] = timestamp
-    return timestamp
+    _GIT_ROOT_CACHE[docs_dir] = None
+    return None
 
 
 def _count_words(text):
@@ -348,5 +402,5 @@ def _format_relative_time(timestamp):
     if months < 12:
         return "{} months ago".format(months)
 
-    years = delta_days // 365
+    years = max(1, delta_days // 365)
     return "{} years ago".format(years)
