@@ -34,17 +34,4 @@
     - 逆向工程[lab]: Bigdata/C_B04_Reverse/
 {{ END_TOC }}
 
-<!-- - 控制类课程
-    - 电气控制技术 <span class="toc-tag toc-tag-classnotes"></span>
-    - 现代控制原理 <span class="toc-tag toc-tag-classnotes"></span>
-    - 智能控制技术 <span class="toc-tag toc-tag-classnotes"></span>
-    - 运动控制 <span class="toc-tag toc-tag-classnotes"></span>
-- 传感与检测
-    - 传感检测技术 <span class="toc-tag toc-tag-classnotes"></span>
-    - PLC 课程内容 <span class="toc-tag toc-tag-classnotes"></span>
-- 机器学习课程
-    - 人工智能与机器学习 <span class="toc-tag toc-tag-classnotes"></span>
-    - 系列实验 <span class="toc-tag toc-tag-reports"></span>
-- 大数据与安全
-    - 信息安全导论 <span class="toc-tag toc-tag-classnotes"></span>
-    - 逆向工程 <span class="toc-tag toc-tag-classnotes"></span> -->
+

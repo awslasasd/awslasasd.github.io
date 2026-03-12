@@ -314,6 +314,7 @@ nav:
         - 自注意力 : CS/DL/Transformer/C_D03_Tf01_Self_attention.md
         - Transformer : CS/DL/Transformer/C_D03_Tf02_Transformer.md
         - Vit : CS/DL/Transformer/C_D03_Tf03_VisionTransformer.md
+        - Dit : CS/DL/Transformer/C_D03_Tf04_DiffusionTransformer.md
       - Diffusion :
         - 内容简介 : CS/DL/Diffusion/C_D03_D00_Introduction.md
         - 基础内容 : CS/DL/Diffusion/C_D03_D01_DiffusionModel.md

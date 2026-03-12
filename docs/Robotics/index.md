@@ -21,14 +21,4 @@
     - Arduino 实践[lab]: Embedded/R_E01_arduinoTest/
 {{ END_TOC }}
 
-<!-- - 导航与定位
-    - 导航规划 <span class="toc-tag toc-tag-classnotes"></span>
-    - 里程估计 <span class="toc-tag toc-tag-classnotes"></span>
-    - 定位 <span class="toc-tag toc-tag-classnotes"></span>
-- 机器人建模
-    - ROS 框架 <span class="toc-tag toc-tag-classnotes"></span>
-    - 机器人建模课程 <span class="toc-tag toc-tag-classnotes"></span>
-    - 复习资料 <span class="toc-tag toc-tag-reports"></span>
-- 嵌入式与通信
-    - Modbus <span class="toc-tag toc-tag-classnotes"></span>
-    - Arduino 实践 <span class="toc-tag toc-tag-classnotes"></span> -->
+

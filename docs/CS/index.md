@@ -20,20 +20,10 @@
     - 自注意力: DL/Transformer/C_D03_Tf01_Self_attention/
     - Transformer: DL/Transformer/C_D03_Tf02_Transformer/
     - ViT: DL/Transformer/C_D03_Tf03_VisionTransformer/
+    - DiT: DL/Transformer/C_D03_Tf04_DiffusionTransformer.md
 - Diffusion:
     - 内容简介: DL/Diffusion/C_D03_D00_Introduction/
     - Diffusion Model: DL/Diffusion/C_D03_D01_DiffusionModel/
     - Stable Diffusion: DL/Diffusion/C_D03_D02_StableDiffusion/
 {{ END_TOC }}
 
-<!-- - 机器学习
-    - 机器学习内容 <span class="toc-tag toc-tag-classnotes"></span>
-- 深度学习
-    - 学习路线简介 <span class="toc-tag toc-tag-classnotes"></span>
-- Transformer
-    - 自注意力 <span class="toc-tag toc-tag-classnotes"></span>
-    - Transformer <span class="toc-tag toc-tag-classnotes"></span>
-    - ViT <span class="toc-tag toc-tag-classnotes"></span>
-- Diffusion
-    - Diffusion Model <span class="toc-tag toc-tag-classnotes"></span>
-    - Stable Diffusion <span class="toc-tag toc-tag-classnotes"></span> -->
