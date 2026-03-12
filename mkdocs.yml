@@ -161,6 +161,7 @@ extra_css:
   - style/css/custom.css
   - style/css/counter.css
   - style/css/toc.css
+  - style/css/toc-cards.css
   - style/css/flink.css
   # - https://unpkg.com/katex@0/dist/katex.min.css
   # source: https://tonycrane.cc/
@@ -179,6 +180,9 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
+
+hooks:
+  - hooks/render_toc.py
 
 
 
@@ -224,6 +228,7 @@ nav:
     - index.md
     - 友链: links.md
   - Class: 
+    - Class/index.md
     - 控制 :
       - 电气控制技术 : Class/Control/C_C01_Electrical_control.md
       - 现代控制原理 : Class/Control/C_C02_Modern_control.md
@@ -272,6 +277,7 @@ nav:
       - 蜜罐部署 : Class/Bigdata/C_B03_Honeypot.md
       - 逆向工程 : Class/Bigdata/C_B04_Reverse.md
   - Robotics : 
+    - Robotics/index.md
     - Naviagtion : 
       - 导航规划 : Robotics/Navigation/R_N01_Navigation_planning.md
       - 里程估计 : Robotics/Navigation/R_N02_Odometry.md
@@ -290,6 +296,7 @@ nav:
       - Modbus : Robotics/Embedded/R_E01_Modbus.md
       - Arduino实践 : Robotics/Embedded/R_E01_arduinoTest.md
   - CS : 
+    - CS/index.md
     - ML :
       - 内容 : CS/ML/C_M01_ML.md
     - DL :
@@ -307,10 +314,15 @@ nav:
         - 自注意力 : CS/DL/Transformer/C_D03_Tf01_Self_attention.md
         - Transformer : CS/DL/Transformer/C_D03_Tf02_Transformer.md
         - Vit : CS/DL/Transformer/C_D03_Tf03_VisionTransformer.md
+      - Diffusion :
+        - 内容简介 : CS/DL/Diffusion/C_D03_D00_Introduction.md
+        - 基础内容 : CS/DL/Diffusion/C_D03_D01_DiffusionModel.md
+        - 相关技巧 : CS/DL/Diffusion/C_D03_D02_StableDiffusion.md
   # - Reproduction :
   #   - UAV自主探索 : Reproduction/P_01.md
   #   - FALCON : Reproduction/P_02.md
   - Tools: 
+    - Tools/index.md
     - Git: Tools/Git.md
     - Leetcode : 
       - 简介 : Tools/LeetCode/T_L00_Introduction.md
