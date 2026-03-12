@@ -156,14 +156,15 @@ def _build_meta(stats):
         return '<span class="toc-meta-item toc-meta-item--empty">暂无统计</span>'
 
     items = [
-        ("◔", str(stats["words"]), "toc-meta-item--words"),
+        ("words", str(stats["words"]), "toc-meta-item--words"),
     ]
     if stats["code_lines"] > 0:
-        items.append(("</>", str(stats["code_lines"]), "toc-meta-item--code"))
-    items.append(("◷", "{} mins".format(stats["read_minutes"]), "toc-meta-item--time"))
+        items.append(("code", str(stats["code_lines"]), "toc-meta-item--code"))
+    items.append(("time", "{} mins".format(stats["read_minutes"]), "toc-meta-item--time"))
 
     parts = []
-    for icon, value, css_class in items:
+    for icon_name, value, css_class in items:
+        icon_svg = _meta_icon_svg(icon_name)
         parts.append(
             (
                 '<span class="toc-meta-item {css}">'
@@ -172,11 +173,38 @@ def _build_meta(stats):
                 "</span>"
             ).format(
                 css=css_class,
-                icon=html.escape(icon),
+                icon=icon_svg,
                 value=html.escape(value),
             )
         )
     return "".join(parts)
+
+
+def _meta_icon_svg(name):
+    if name == "words":
+        # Dial-like icon (close to a "reading meter" style)
+        return (
+            '<svg viewBox="0 0 16 16" role="img" aria-hidden="true">'
+            '<circle cx="8" cy="8" r="5.5"></circle>'
+            '<path d="M8 8 L11.3 5.7"></path>'
+            '<path d="M8 2.7 V4"></path>'
+            '</svg>'
+        )
+    if name == "code":
+        return (
+            '<svg viewBox="0 0 16 16" role="img" aria-hidden="true">'
+            '<path d="M5.2 4.4 L2.6 8 L5.2 11.6"></path>'
+            '<path d="M10.8 4.4 L13.4 8 L10.8 11.6"></path>'
+            '<path d="M9.1 3.8 L6.9 12.2"></path>'
+            '</svg>'
+        )
+    return (
+        '<svg viewBox="0 0 16 16" role="img" aria-hidden="true">'
+        '<circle cx="8" cy="8" r="5.5"></circle>'
+        '<path d="M8 4.9 V8.1"></path>'
+        '<path d="M8 8.1 L10.5 9.4"></path>'
+        '</svg>'
+    )
 
 
 def _resolve_source_file(href, page, files):

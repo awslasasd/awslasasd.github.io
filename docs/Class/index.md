@@ -24,14 +24,14 @@
     - 机器学习实验三[lab]: class_source/C_M01/LAB3/
     - 机器学习实验四[lab]: class_source/C_M01/LAB4/
 - 思政课程:
-    - 毛概[note]: Ideological/C_I01_Mao_theories/
-    - 发展对象[note]: Ideological/C_I02_PartydevExam/
-    - 习概[note]: Ideological/C_I03_Xi_theories/
+    - 毛概[review]: Ideological/C_I01_Mao_theories/
+    - 发展对象[review]: Ideological/C_I02_PartydevExam/
+    - 习概[review]: Ideological/C_I03_Xi_theories/
 - 大数据与安全:
-    - 信息安全导论[note]: Bigdata/C_B01_Information_safety/
-    - 扫描工具[note]: Bigdata/C_B02_Scan/
-    - 蜜罐部署[note]: Bigdata/C_B03_Honeypot/
-    - 逆向工程[note]: Bigdata/C_B04_Reverse/
+    - 信息安全导论[lab]: Bigdata/C_B01_Information_safety/
+    - 扫描工具[lab]: Bigdata/C_B02_Scan/
+    - 蜜罐部署[lab]: Bigdata/C_B03_Honeypot/
+    - 逆向工程[lab]: Bigdata/C_B04_Reverse/
 {{ END_TOC }}
 
 <!-- - 控制类课程

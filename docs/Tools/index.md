@@ -11,10 +11,10 @@
     - Latex: latex/
     - 建站记录: Createsite/
 - 刷题与练习:
-    - LeetCode 简介[note]: LeetCode/T_L00_Introduction/
+    - LeetCode 简介: LeetCode/T_L00_Introduction/
 - Linux 相关:
-    - 双系统开机顺序调整[note]: Linux/linux/
-    - SSH[note]: Linux/ssh/
+    - 双系统开机顺序调整: Linux/linux/
+    - SSH: Linux/ssh/
 {{ END_TOC }}
 
 <!-- - 通用工具

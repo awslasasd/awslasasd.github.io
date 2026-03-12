@@ -4,26 +4,26 @@
 
 {{ BEGIN_TOC }}
 - 机器学习:
-    - 机器学习内容[note]: ML/C_M01_ML/
+    - 机器学习内容: ML/C_M01_ML/
 - 深度学习总览:
-    - 学习路线简介[note]: DL/C_D01_Introduction/
+    - 学习路线简介: DL/C_D01_Introduction/
 - Fish Book:
-    - 内容简介[note]: DL/FishBook/C_D02_FB00_Introduction/
-    - 感知机[note]: DL/FishBook/C_D02_FB01_Perceptron/
-    - 神经网络[note]: DL/FishBook/C_D02_FB02_Neural_network/
-    - 神经网络学习[note]: DL/FishBook/C_D02_FB03_NeuralNet_Learning/
-    - 反向传播[note]: DL/FishBook/C_D02_FB04_Backpropagation/
-    - 相关技巧[note]: DL/FishBook/C_D02_FB05_Skills/
-    - 卷积神经网络[note]: DL/FishBook/C_D02_FB06.Convolutional_Neural_Network/
+    - 内容简介: DL/FishBook/C_D02_FB00_Introduction/
+    - 感知机: DL/FishBook/C_D02_FB01_Perceptron/
+    - 神经网络: DL/FishBook/C_D02_FB02_Neural_network/
+    - 神经网络学习: DL/FishBook/C_D02_FB03_NeuralNet_Learning/
+    - 反向传播: DL/FishBook/C_D02_FB04_Backpropagation/
+    - 相关技巧: DL/FishBook/C_D02_FB05_Skills/
+    - 卷积神经网络: DL/FishBook/C_D02_FB06.Convolutional_Neural_Network/
 - Transformer:
-    - 内容简介[note]: DL/Transformer/C_D03_Tf00_Introduction/
-    - 自注意力[note]: DL/Transformer/C_D03_Tf01_Self_attention/
-    - Transformer[note]: DL/Transformer/C_D03_Tf02_Transformer/
-    - ViT[note]: DL/Transformer/C_D03_Tf03_VisionTransformer/
+    - 内容简介: DL/Transformer/C_D03_Tf00_Introduction/
+    - 自注意力: DL/Transformer/C_D03_Tf01_Self_attention/
+    - Transformer: DL/Transformer/C_D03_Tf02_Transformer/
+    - ViT: DL/Transformer/C_D03_Tf03_VisionTransformer/
 - Diffusion:
-    - 内容简介[note]: DL/Diffusion/C_D03_D00_Introduction/
-    - Diffusion Model[note]: DL/Diffusion/C_D03_D01_DiffusionModel/
-    - Stable Diffusion[note]: DL/Diffusion/C_D03_D02_StableDiffusion/
+    - 内容简介: DL/Diffusion/C_D03_D00_Introduction/
+    - Diffusion Model: DL/Diffusion/C_D03_D01_DiffusionModel/
+    - Stable Diffusion: DL/Diffusion/C_D03_D02_StableDiffusion/
 {{ END_TOC }}
 
 <!-- - 机器学习
