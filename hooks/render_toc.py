@@ -5,6 +5,7 @@ import math
 import os
 import posixpath
 import re
+import subprocess
 from datetime import datetime
 
 BEGIN_TOC = "{{ BEGIN_TOC }}"
@@ -16,6 +17,8 @@ TAG_INFO = {
     "lab": ("实验报告", "lab"),
     "exam": ("历年试题", "exam"),
 }
+
+_GIT_TIME_CACHE = {}
 
 
 def on_page_markdown(markdown, page, config, files):
@@ -253,7 +256,9 @@ def _collect_file_stats(src_uri, config):
     words = _count_words(content)
     code_lines = _count_code_lines(content)
     read_minutes = max(1, math.ceil(words / 256 + code_lines / 80))
-    modified = os.path.getmtime(abs_path)
+    modified = _get_git_modified_timestamp(src_uri, docs_dir)
+    if modified is None:
+        modified = os.path.getmtime(abs_path)
 
     return {
         "words": words,
@@ -261,6 +266,40 @@ def _collect_file_stats(src_uri, config):
         "read_minutes": read_minutes,
         "modified": modified,
     }
+
+
+def _get_git_modified_timestamp(src_uri, docs_dir):
+    if not src_uri or not docs_dir:
+        return None
+
+    cache_key = (docs_dir, src_uri)
+    if cache_key in _GIT_TIME_CACHE:
+        return _GIT_TIME_CACHE[cache_key]
+
+    try:
+        result = subprocess.run(
+            ["git", "log", "-1", "--follow", "--format=%ct", "--", src_uri],
+            cwd=docs_dir,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except OSError:
+        _GIT_TIME_CACHE[cache_key] = None
+        return None
+
+    if result.returncode != 0:
+        _GIT_TIME_CACHE[cache_key] = None
+        return None
+
+    output = result.stdout.strip()
+    if not output.isdigit():
+        _GIT_TIME_CACHE[cache_key] = None
+        return None
+
+    timestamp = float(output)
+    _GIT_TIME_CACHE[cache_key] = timestamp
+    return timestamp
 
 
 def _count_words(text):
