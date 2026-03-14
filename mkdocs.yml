@@ -319,6 +319,9 @@ nav:
         - 内容简介 : CS/DL/Diffusion/C_D03_D00_Introduction.md
         - 基础内容 : CS/DL/Diffusion/C_D03_D01_DiffusionModel.md
         - 相关技巧 : CS/DL/Diffusion/C_D03_D02_StableDiffusion.md
+  - VLA :
+    - VLA/index.md
+    - 推荐阅读 : VLA/RecomRead.md
   # - Reproduction :
   #   - UAV自主探索 : Reproduction/P_01.md
   #   - FALCON : Reproduction/P_02.md
