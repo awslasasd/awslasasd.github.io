@@ -58,7 +58,90 @@ $\alpha$的计算则引出了最为关键的三个向量$q$、 $k$、$v$ ，下�
     而Self-attention则规定了$QKV$三个矩阵是同源的，都是由X乘不同矩阵得到的
 
 
+## 代码
 
+```python
+import torch
+import torch.nn as nn
+
+# 定义多头注意力层
+class MultiHeadAttention(nn.Module):
+    # 初始化
+    # dim: 输入向量的维度
+    # num_heads: 注意力头数
+    # dropout: 防止过拟合
+    def __init__(self, dim, num_heads, dropout=0.1):
+        super().__init__()
+        # 确保维度能被头数均分
+        assert dim % num_heads == 0
+        
+        # 保存基础参数
+        self.dim = dim                  # 输入总维度
+        self.num_heads = num_heads      # 头数
+        self.head_dim = dim // num_heads # 每个头的维度（均分后）
+        
+        # 三个线性层：把输入分别变成 Q, K, V
+        self.w_q = nn.Linear(dim, dim)
+        self.w_k = nn.Linear(dim, dim)
+        self.w_v = nn.Linear(dim, dim)
+        
+        # dropout层
+        self.dropout = nn.Dropout(dropout)
+
+    # 前向传播（真正计算）
+    def forward(self, q, k, v, mask=None):
+        # 获取形状：B=批次大小，L_q=查询序列长度
+        B, L_q, _ = q.shape
+        # K和V的序列长度
+        L_kv = k.shape[1]
+        
+        # ====================== 1. 线性变换 ======================
+        # 把输入通过线性层，变成查询Q、键K、值V
+        q = self.w_q(q)
+        k = self.w_k(k)
+        v = self.w_v(v)
+        
+        # ====================== 2. 拆分成多个头 ======================
+        # view：把维度拆成 [批次, 长度, 头数, 单头维度]
+        # transpose：交换维度 → [批次, 头数, 长度, 单头维度]（方便计算）
+        # 最终维度：[B, num_heads, L_q, head_dim]
+        q = q.view(B, L_q, self.num_heads, self.head_dim).transpose(1, 2)
+        # 最终维度：[B, num_heads, L_kv, head_dim]
+        k = k.view(B, L_kv, self.num_heads, self.head_dim).transpose(1, 2)
+        # 最终维度：[B, num_heads, L_kv, head_dim]
+        v = v.view(B, L_kv, self.num_heads, self.head_dim).transpose(1, 2)
+        
+        # ====================== 3. 计算注意力分数 ======================
+        # Q × K的转置 = 算相似度
+        # 除以 √head_dim = 防止数值太大
+        
+        # ----------------- 重点：attn 每一步维度解释 -----------------
+        # attn 初始计算维度：[B, num_heads, L_q, head_dim] @ [B, num_heads, head_dim, L_kv]
+        # 矩阵相乘后 → attn = [B, num_heads, L_q, L_kv]
+        # 含义：每个查询，对每个键的注意力分数
+        attn = (q @ k.transpose(-2, -1)) / torch.sqrt(torch.tensor(self.head_dim, dtype=torch.float32))
+        
+        # 掩码：屏蔽不需要的位置，维度仍然保持：[B, num_heads, L_q, L_kv]
+        if mask is not None:
+            attn = attn.masked_fill(mask == 0, -1e9)
+        
+        # softmax：把分数变成权重，维度不变：[B, num_heads, L_q, L_kv]
+        attn = torch.softmax(attn, dim=-1)
+        # dropout：随机失活，维度不变：[B, num_heads, L_q, L_kv]
+        attn = self.dropout(attn)
+        
+        # ====================== 4. 加权求和 + 拼接输出 ======================
+        # 注意力权重 × V
+        # attn 维度：[B, num_heads, L_q, L_kv]
+        # V 维度：[B, num_heads, L_kv, head_dim]
+        # 相乘后 out 维度：[B, num_heads, L_q, head_dim]
+        out = attn @ v
+        
+        # 把多头拼回去：[B, num_heads, L_q, head_dim] → [B, L_q, dim]
+        out = out.transpose(1, 2).contiguous().view(B, L_q, self.dim)
+        
+        return out
+```
 
 
 
