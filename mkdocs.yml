@@ -326,6 +326,9 @@ nav:
       - 内容简介 : VLA/PreKnow/V_P00_Introduction.md
       - DDPM : VLA/PreKnow/V_P01_DDPM.md
       - FlowMatching : VLA/PreKnow/V_P01_FlowMatching.md
+    - Pi系列 :
+      - 内容简介 : VLA/Pi/V_Pi00_Introduction.md
+      - Pi0 : VLA/Pi/V_Pi01_pi0.md
   # - Reproduction :
   #   - UAV自主探索 : Reproduction/P_01.md
   #   - FALCON : Reproduction/P_02.md

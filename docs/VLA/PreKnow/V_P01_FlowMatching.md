@@ -59,6 +59,7 @@ $$
 #### 目标流构建
 
 构造一个flow:
+
 $$
 \psi_t^{target}(x_0|z) = \alpha_t z + \beta_t x_0
 $$
@@ -66,17 +67,21 @@ $$
 其中$\alpha_t = t \quad \beta_t = 1-t$
 
 当 $t=0$ 时：
+
 $$
 \alpha_t = 0 \quad \beta_t = 1
 $$
+
 $$
 \psi_t^{target}(x_0|z) = x_0
 $$
 
 当 $t=1$ 时：
+
 $$
 \alpha_t = 1 \quad \beta_t = 0
 $$
+
 $$
 \psi_t^{target}(x_0|z) = z
 $$
