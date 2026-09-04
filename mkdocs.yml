@@ -329,6 +329,7 @@ nav:
     - Pi系列 :
       - 内容简介 : VLA/Pi/V_Pi00_Introduction.md
       - Pi0 : VLA/Pi/V_Pi01_pi0.md
+      - Pi0Fast : VLA/Pi/V_Pi02_pi0Fast.md
   # - Reproduction :
   #   - UAV自主探索 : Reproduction/P_01.md
   #   - FALCON : Reproduction/P_02.md
