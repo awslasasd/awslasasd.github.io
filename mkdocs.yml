@@ -330,6 +330,11 @@ nav:
       - 内容简介 : VLA/Pi/V_Pi00_Introduction.md
       - Pi0 : VLA/Pi/V_Pi01_pi0.md
       - Pi0Fast : VLA/Pi/V_Pi02_pi0Fast.md
+      - HiRobot : VLA/Pi/V_Pi03_HiRobot.md
+      - Pi0.5 : VLA/Pi/V_Pi04_pi0.5.md
+      - KI : VLA/Pi/V_Pi05_KI.md
+      - Pi0.6 : VLA/Pi/V_Pi06_pi0.6.md
+      - Pi0.7 : VLA/Pi/V_Pi07_pi0.7.md
   # - Reproduction :
   #   - UAV自主探索 : Reproduction/P_01.md
   #   - FALCON : Reproduction/P_02.md
