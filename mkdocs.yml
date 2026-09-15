@@ -342,6 +342,8 @@ nav:
     - WM/index.md
     - 推荐阅读 : WM/RecomRead.md
     - 简介 : WM/W_00_Introduction.md
+    - DreamZero : WM/W_01_DreamZero.md
+    - FASTWAM : WM/W_02_FASTWAM.md
   - Tools: 
     - Tools/index.md
     - Git: Tools/Git.md
