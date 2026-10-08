@@ -14,6 +14,7 @@
     - LeetCode 简介: LeetCode/T_L00_Introduction/
     - 哈希表 : LeetCode/T_L01_HashMap.md
     - 八股 : LeetCode/T_L000_about.md
+    - 华为机考 : LeetCode/T_L01_HaweiAI.md
 - Linux 相关:
     - 双系统开机顺序调整: Linux/linux/
     - SSH: Linux/ssh/

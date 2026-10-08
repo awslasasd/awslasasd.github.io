@@ -351,6 +351,7 @@ nav:
       - 八股 : Tools/LeetCode/T_L000_about.md
       - 简介 : Tools/LeetCode/T_L00_Introduction.md
       - 哈希表 : Tools/LeetCode/T_L01_HashMap.md
+      - 华为机试 : Tools/LeetCode/T_L02_HaweiAI.md
     - Createsite : Tools/Createsite.md 
     - Juypter: Tools/Juypter.md
     - AI: Tools/AI.md
